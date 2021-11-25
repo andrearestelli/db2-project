@@ -18,6 +18,10 @@ public class OptionalProduct implements Serializable {
     private List<ServicePackage> servicePackagesOwner;
     */
 
+    // TODO verificare necessità
+    @ManyToMany(mappedBy = "optionalProducts")
+    private List<ServiceActivationSchedule> serviceActivationScheduleList;
+
     public void setName(String name) {
         this.name = name;
     }

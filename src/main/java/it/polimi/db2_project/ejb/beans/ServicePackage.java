@@ -19,7 +19,14 @@ public class ServicePackage implements Serializable {
     */
 
     @ManyToMany
+    @JoinTable(name = "package_opt_product_link", joinColumns = {@JoinColumn(name = "id_package")},
+            inverseJoinColumns = {@JoinColumn(name = "id_opt_product")})
     private List<OptionalProduct> optionalProducts;
+
+    @ManyToMany
+    @JoinTable(name = "service_to_package_link", joinColumns = {@JoinColumn(name = "ID_package")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_service")})
+    private List<Service> services;
 
     public void setID(Integer id) {
         this.ID = id;
