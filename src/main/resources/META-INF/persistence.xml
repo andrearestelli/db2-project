@@ -3,7 +3,16 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    <persistence-unit name="default">
+    <persistence-unit name="db2-telco" transaction-type="JTA">
+        <jta-data-source>telcodb</jta-data-source>
+        <class>it.polimi.db2_project.ejb.beans.Alert</class>
+        <class>it.polimi.db2_project.ejb.beans.Customer</class>
+        <class>it.polimi.db2_project.ejb.beans.ServicePackage</class>
+        <class>it.polimi.db2_project.ejb.beans.Service</class>
+        <class>it.polimi.db2_project.ejb.beans.Employee</class>
+        <class>it.polimi.db2_project.ejb.beans.OptionalProduct</class>
+        <class>it.polimi.db2_project.ejb.beans.Order</class>
+        <class>it.polimi.db2_project.ejb.beans.ServiceActivationSchedule</class>
 
     </persistence-unit>
 </persistence>
