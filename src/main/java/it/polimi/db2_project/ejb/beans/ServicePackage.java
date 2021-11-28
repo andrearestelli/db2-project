@@ -5,6 +5,14 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@NamedQueries(
+        {
+                @NamedQuery(name = "ServicePackage.findAllPackages"
+                        ,query = "Select sp " +
+                        "FROM ServicePackage sp ")
+        }
+)
+
 public class ServicePackage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
