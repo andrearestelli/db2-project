@@ -10,7 +10,7 @@ import java.util.Optional;
 @Stateless
 public class CustomerService {
 
-    @PersistenceContext
+    /*@PersistenceContext
     private EntityManager em;
 
     public Optional<Customer> checkCredentials(String username, String password) {
@@ -41,5 +41,5 @@ public class CustomerService {
         Optional customer = findCustomerByUsername(username);
         if(customer.isPresent()) ((Customer) customer.get()).setInsolvent(false);
         //em.persist(customer);
-    }
+    }*/
 }

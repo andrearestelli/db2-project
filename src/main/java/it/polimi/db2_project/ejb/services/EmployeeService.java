@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Stateless
 public class EmployeeService {
-
+/*
     @PersistenceContext
     private EntityManager em;
 
@@ -18,5 +18,5 @@ public class EmployeeService {
         return em.createNamedQuery("Employee.checkCredentials",Employee.class).
                 setParameter("username",username).setParameter("password",password).
                 getResultStream().findFirst();
-    }
+    }*/
 }
