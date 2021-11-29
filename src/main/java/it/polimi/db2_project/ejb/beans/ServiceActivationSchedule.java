@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "service_activation_schedule", schema = "telcodb")
 public class ServiceActivationSchedule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,13 +21,28 @@ public class ServiceActivationSchedule implements Serializable {
     private Date deactivation_date;
 
     @ManyToMany
-    @JoinTable(name = "schedule_service_link", joinColumns = {@JoinColumn(name = "ID_user"),
-            @JoinColumn(name = "ID_schedule")}, inverseJoinColumns = {@JoinColumn(name = "ID_service")})
+    // referencedColumnName serve perchè si tratta di una tabella ponte che comprende una entità con chiave
+    // composta da due id. In questo caso risulta dunque necessario specificare anche a quale colonna
+    // della tabella ServiceActivationSchedule si riferiscono le colonne della tabella ponte.
+    @JoinTable(
+            name = "schedule_service_link",
+            joinColumns = {
+                    @JoinColumn(name = "ID_user", referencedColumnName = "user_id"),
+                    @JoinColumn(name = "ID_schedule", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_service")})
     private List<Service> services;
 
     @ManyToMany
-    @JoinTable(name = "opt_product_schedule_link", joinColumns = {@JoinColumn(name = "ID_user"),
-            @JoinColumn(name = "ID_schedule")}, inverseJoinColumns = {@JoinColumn(name = "ID_opt_product")})
+    // referencedColumnName serve perchè si tratta di una tabella ponte che comprende una entità con chiave
+    // composta da due id. In questo caso risulta dunque necessario specificare anche a quale colonna
+    // della tabella ServiceActivationSchedule si riferiscono le colonne della tabella ponte.
+    @JoinTable(
+            name = "opt_product_schedule_link",
+            joinColumns = {
+                    @JoinColumn(name = "ID_user", referencedColumnName = "user_id"),
+                    @JoinColumn(name = "ID_schedule", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_opt_product")})
     private List<OptionalProduct> optionalProducts;
+
 
 }

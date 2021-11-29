@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Table(name = "order", schema = "telcodb")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

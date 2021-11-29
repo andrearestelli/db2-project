@@ -1,6 +1,5 @@
 package it.polimi.db2_project.ejb.services;
 
-import it.polimi.db2_project.ejb.beans.Service;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
 
 import javax.ejb.Stateless;
@@ -10,12 +9,13 @@ import java.util.List;
 
 @Stateless
 public class PackageService {
-   /* @PersistenceContext
+
+    @PersistenceContext(name = "telcoEJB")
     private EntityManager em;
 
     public List<ServicePackage> findAllServicePackage(){
         return em.createNamedQuery("ServicePackage.findAllPackages", ServicePackage.class).
                                 getResultList();
     }
-*/
+
 }

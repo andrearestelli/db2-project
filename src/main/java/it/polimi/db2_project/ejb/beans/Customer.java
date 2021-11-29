@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@Table(name = "customer", schema = "telcodb")
 @NamedQueries(
         {
         @NamedQuery(name = "Customer.checkCredentials"
@@ -18,8 +19,6 @@ import java.util.List;
                             "WHERE c.username = :username")
         }
 )
-
-@Table(name = "customer", schema = "telcodb")
 public class Customer implements Serializable {
     @Id
     private String username;

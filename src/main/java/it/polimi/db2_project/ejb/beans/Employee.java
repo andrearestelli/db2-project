@@ -7,11 +7,11 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "employee", schema = "telcodb")
 @NamedQuery(name = "Employee.checkCredentials"
         ,query = "Select e " +
         "FROM Employee e " +
         "WHERE e.username = :username AND e.password = :password")
-@Table(name = "employee", schema = "telcodb")
 public class Employee implements Serializable {
     @Id
     private String username;

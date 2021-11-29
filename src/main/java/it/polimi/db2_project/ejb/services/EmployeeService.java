@@ -1,6 +1,5 @@
 package it.polimi.db2_project.ejb.services;
 
-import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Employee;
 
 import javax.ejb.Stateless;
@@ -10,13 +9,13 @@ import java.util.Optional;
 
 @Stateless
 public class EmployeeService {
-/*
-    @PersistenceContext
+
+    @PersistenceContext(name = "telcoEJB")
     private EntityManager em;
 
     public Optional<Employee> checkCredentials(String username, String password) {
         return em.createNamedQuery("Employee.checkCredentials",Employee.class).
                 setParameter("username",username).setParameter("password",password).
                 getResultStream().findFirst();
-    }*/
+    }
 }
