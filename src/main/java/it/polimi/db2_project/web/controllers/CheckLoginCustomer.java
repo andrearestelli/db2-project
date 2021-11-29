@@ -24,12 +24,17 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
         super("customerLogin","WEB-INF/templates/",".html",TemplateMode.HTML);
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        processTemplate(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
         String username = null;
         String password = null;
         username = request.getParameter("username");
         password = request.getParameter("password");
-        /*if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
+        if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
             //TODO ritorna errore
         }
         Optional<Customer> result = customerService.checkCredentials(username,password);
@@ -40,15 +45,9 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
         }
         else{
             //TODO Ritorna errore
-        }*/
+        }
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        String path;
-        ServletContext servletContext = getServletContext();
-        path="index.html";
-        response.sendRedirect(path);
-    }
+
     public void destroy(){
 
     }
