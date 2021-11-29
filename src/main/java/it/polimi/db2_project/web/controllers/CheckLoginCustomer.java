@@ -29,10 +29,10 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
         String password = null;
         username = request.getParameter("username");
         password = request.getParameter("password");
-        if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
+        /*if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
             //TODO ritorna errore
         }
-        /*Optional<Customer> result = customerService.checkCredentials(username,password);
+        Optional<Customer> result = customerService.checkCredentials(username,password);
         if(result.isPresent()){
             Customer customer = result.get();
             request.getSession().setAttribute("user",customer);

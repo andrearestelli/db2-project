@@ -10,7 +10,7 @@ import java.util.List;
 
 @Stateless
 public class PackageService {
-    /*@PersistenceContext
+   /* @PersistenceContext
     private EntityManager em;
 
     public List<ServicePackage> findAllServicePackage(){
