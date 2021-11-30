@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public abstract class AbstractThymeleafServlet extends HttpServlet {
-    private final String templatePath;
+    protected String templatePath;
     private final String pathPrefix;
     private final String pathSuffix;
     protected TemplateMode templateMode;
@@ -51,4 +51,5 @@ public abstract class AbstractThymeleafServlet extends HttpServlet {
         }
         templateEngine.process(templatePath, webContext, response.getWriter());
     }
+
 }

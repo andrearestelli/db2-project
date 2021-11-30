@@ -23,13 +23,13 @@ public class Customer implements Serializable {
     @Id
     private String username;
     private String password;
-    private String email;
+    private String mail;
     private boolean insolvent;
 
-    public Customer(String username, String password, String email) {
+    public Customer(String username, String password, String mail) {
         this.username = username;
         this.password = password;
-        this.email = email;
+        this.mail = mail;
         this.insolvent = false;
     }
 
@@ -51,6 +51,10 @@ public class Customer implements Serializable {
     }
 
     public void setInsolvent(boolean insolvent) {this.insolvent = insolvent;}
+
+    public String getMail() {
+        return mail;
+    }
 
     public String getUsername() {
         return username;

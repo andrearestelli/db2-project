@@ -26,10 +26,11 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+
         processTemplate(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = null;
         String password = null;
         username = request.getParameter("username");
@@ -40,8 +41,10 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
         Optional<Customer> result = customerService.checkCredentials(username,password);
         if(result.isPresent()){
             Customer customer = result.get();
-            request.getSession().setAttribute("user",customer);
-            //TODO Manda alla Homepage
+            request.getSession().setAttribute("username",customer.getUsername());
+            request.getSession().setAttribute("mail",customer.getMail());
+            //Manda alla Homepage
+            response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
         }
         else{
             //TODO Ritorna errore
