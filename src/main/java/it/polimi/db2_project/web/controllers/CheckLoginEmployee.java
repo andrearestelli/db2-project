@@ -27,7 +27,7 @@ public class CheckLoginEmployee extends AbstractThymeleafServlet{
 
         processTemplate(request, response);
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = null;
         String password = null;
         username = request.getParameter("username");
@@ -40,6 +40,9 @@ public class CheckLoginEmployee extends AbstractThymeleafServlet{
             Employee employee = result.get();
             request.getSession().setAttribute("user",employee);
             //TODO Manda alla Homepage
+            request.getSession().setAttribute("username",employee.getUsername());
+            //Manda alla Homepage
+            response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageEmployee");
         }
         else{
             //TODO Ritorna errore
