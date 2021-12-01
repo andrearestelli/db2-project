@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>HomePageCustomer</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-  <p><b>Welcome back <span th:text="${username}"></span>!</b></p>
+    <a th:if="${username!=null}"><p><b>Welcome back <span th:text="${username}"></span>!</b></p>
+    </a>
+    <a th:if="${username==null}"><p><b>Welcome to Telco Company guest!</b></p>
+    </a>
+    <a href="CheckLoginCustomer" th:if="${username==null}" class="button">Login</a>
+    <a href="CheckLoginEmployee" class="button">Buy Services</a>
+
+    <table border="1">
+        <tr>
+            <th><b>ID</b></th>
+            <th><b>Name</b></th>
+            <th><b>Validity period</b></th>
+            <th><b>Monthly fee</b></th>
+        </tr>
+        <tr th:each="servicePackage : ${servicePackages}">
+            <td th:text="${servicePackage.ID}"></td>
+            <td th:text="${servicePackage.name}"></td>
+            <td th:text="${servicePackage.validity_period}"></td>
+            <td th:text="${servicePackage.monthly_fee}"></td>
+        </tr>
+    </table>
 </body>
 </html>

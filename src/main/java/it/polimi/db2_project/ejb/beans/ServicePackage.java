@@ -51,4 +51,16 @@ public class ServicePackage implements Serializable {
     public Integer getID() {
         return ID;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getValidity_period() {
+        return validity_period;
+    }
+
+    public double getMonthly_fee() {
+        return monthly_fee;
+    }
 }
