@@ -2,17 +2,17 @@ package it.polimi.db2_project.web.controllers;
 
 import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.services.CustomerService;
+import it.polimi.db2_project.web.utils.ParametersChecker;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.ejb.EJB;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @WebServlet("/CheckLoginCustomer")
 public class CheckLoginCustomer extends AbstractThymeleafServlet {
@@ -31,14 +31,19 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = null;
-        String password = null;
+        String username;
+        String password;
         username = request.getParameter("username");
         password = request.getParameter("password");
-        if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            //TODO ritorna errore
+
+        if(ParametersChecker.discoverInvalidParameters(Stream.of(username, password))) {
+            processTemplate(request, response, Collections.singletonMap("errorMessage",
+                    "Invalid parameters"));
+            return;
         }
+
         Optional<Customer> result = customerService.checkCredentials(username,password);
+
         if(result.isPresent()){
             Customer customer = result.get();
             request.getSession().setAttribute("username",customer.getUsername());
@@ -47,7 +52,9 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
             response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
         }
         else{
-            //TODO Ritorna errore
+            // ritorna messaggio di errore
+            processTemplate(request, response, Collections.singletonMap("errorMessage",
+                    "Invalid username or password"));
         }
     }
 
