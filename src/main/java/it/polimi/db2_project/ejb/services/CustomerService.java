@@ -19,8 +19,8 @@ public class CustomerService {
                 getResultStream().findFirst();
     }
 
-    public void registerCustomer(String username, String password, String email) {
-        Customer customer = new Customer(username,password,email);
+    public void registerCustomer(String username, String password, String mail) {
+        Customer customer = new Customer(username,password,mail);
         em.persist(customer);
         em.flush();//TODO comments
     }
