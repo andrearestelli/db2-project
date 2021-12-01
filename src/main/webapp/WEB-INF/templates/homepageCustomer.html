@@ -6,14 +6,14 @@
     <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <a th:if="${username!=null}"><p><b>Welcome back <span th:text="${username}"></span>!</b></p>
+    <a th:if="${username!=null}" class="username"><p><b>Welcome back <span th:text="${username}"></span>!</b></p>
     </a>
-    <a th:if="${username==null}"><p><b>Welcome to Telco Company guest!</b></p>
+    <a th:if="${username==null}" class="username"><p><b>Welcome to Telco Company guest!</b></p>
     </a>
-    <a href="CheckLoginCustomer" th:if="${username==null}" class="button">Login</a>
-    <a href="CheckLoginEmployee" class="button">Buy Services</a>
+    <a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
+    <a href="CheckLoginEmployee" class="button1">Buy Services</a>
 
-    <table border="1">
+    <table>
         <tr>
             <th><b>ID</b></th>
             <th><b>Name</b></th>
