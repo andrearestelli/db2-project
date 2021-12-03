@@ -38,7 +38,7 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         OptionalProductList optionalProductList = gson.fromJson((String)request.getParameter("optionalProductID"), OptionalProductList.class) ;
         Date sub_date = null;
         try {
-             sub_date = new SimpleDateFormat(("dd/MM/yyyy")).parse("subscription_date");
+             sub_date = new SimpleDateFormat(("dd/MM/yyyy")).parse("subscriptionDate");
         } catch (ParseException e) {
             e.printStackTrace();
         }
