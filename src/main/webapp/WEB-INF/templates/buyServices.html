@@ -3,11 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>BuyServices</title>
-    <link rel="stylesheet" type="text/css" media="all" href="../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css"/>
+    <script>
+        function sendOptionalProducts(e){
+            var form = e.closest("form");
+            if(form.checkValidity()) {
+                var optionalProductList = Array.prototype.slice.call(form.querySelectorAll("input[name='optionalProductID']:checked")).map(function () {
+                    return this.value;
+                });
+                var servicePackageID = form.querySelector("input[name = 'servicePackageSelected']");
+                var subscriptionDate = form.querySelector("input[name = 'subscriptionDate']");
+                form = {
+                    "servicePackageSelected" : servicePackageID,
+                    "optionalProductID" : optionalProductList,
+                    "subscriptionDate" : subscriptionDate
+                }
+                form = JSON.stringify(form);
+                var req = new XMLHttpRequest();
+                req.open("POST", "GoToBuyServices");
+                req.setRequestHeader("Content-Type", "application/json");
+                req.send(form);
+            }
+        }
+    </script>
 </head>
 <body>
 <h1>Buy Services page</h1>
-<form method="POST" action="GoToBuyServices">
+<form>
   <table border="1">
       <tr>
           <th><b>Service</b></th>
@@ -22,7 +44,7 @@
           <td><input type="date" name="subscriptionDate"></td>
       </tr>
   </table>
-    <input type="submit" value="CONFIRM">
+    <input type="button" value="CONFIRM" onclick="sendOptionalProducts(this)">
 </form>
 </body>
 </html>
