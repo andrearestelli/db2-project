@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HomePageCustomer</title>
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
     <a th:if="${username!=null}" class="username"><p><b>Welcome back <span th:text="${username}"></span>!</b></p>
