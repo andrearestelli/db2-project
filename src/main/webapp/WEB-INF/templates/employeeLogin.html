@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>employeeLogin</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>Employee Login page</h1>
 <form method="POST" action="CheckLoginEmployee">
-  <p><input autofocus="autofocus" id="username" name="username" placeholder="username" type="text"/> <br/></p>
-  <p><input id="password" name="password" placeholder="password" type="password"/> <br/></p>
-  <p><input id="loginButton" type="submit" value="Login"/></p>
+  <p><input autofocus="autofocus" class="username" id="username" name="username" placeholder="username" type="text"/> <br/></p>
+  <p><input id="password" class="username" name="password" placeholder="password" type="password"/> <br/></p>
+  <p><input id="loginButton" class="button1" type="submit" value="Login"/></p>
 </form>
 </body>
 </html>

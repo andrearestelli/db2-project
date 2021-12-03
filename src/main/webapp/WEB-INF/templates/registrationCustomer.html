@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>RegistrationCustomer</title>
+    <title>RegistrationCustomerPage</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>Customer Registration page</h1>
 <form method="POST" action="GoToRegistrationCustomer">
-    <p><input autofocus="autofocus" id="username" name="username" placeholder="username" type="text"/> <br/></p>
-    <p><input id="mail" name="mail" placeholder="mail" type="text"/> <br/></p>
-    <p><input id="password" name="password" placeholder="password" type="password"/> <br/></p>
-    <p><input id="submitButton" type="submit" value="Register"/></p>
+    <p><input autofocus="autofocus" class="username" id="username" name="username" placeholder="username" type="text"/> <br/></p>
+    <p><input id="mail" name="mail" class="username" placeholder="mail" type="text"/> <br/></p>
+    <p><input id="password" name="password" class="username" placeholder="password" type="password"/> <br/></p>
+    <p><input id="submitButton" type="submit" class="button1" value="Register"/></p>
 </form>
 </body>
 </html>

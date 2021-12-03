@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Telco Application page</title>
-    <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
     <p><b>Welcome to Telco Company!</b></p>
     <p>Choose which application want to launch:</p>
     <form style="display:inline" action="CheckLoginCustomer" method="get">
-        <input type="submit" value="Customer"/>
+        <input type="submit" class="button1" value="Customer"/>
     </form>
     <form style="display:inline" action="CheckLoginEmployee" method="get">
-        <input type="submit" value="Employee"/>
+        <input type="submit" class="button1" value="Employee"/>
     </form>
 
 </body>
