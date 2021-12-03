@@ -63,4 +63,8 @@ public class ServicePackage implements Serializable {
     public double getMonthly_fee() {
         return monthly_fee;
     }
+
+    public List<OptionalProduct> getOptionalProducts() {
+        return optionalProducts;
+    }
 }

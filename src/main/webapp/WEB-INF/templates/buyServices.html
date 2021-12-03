@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://xmlns.jcp.org/jsf/html">
 <head>
     <meta charset="UTF-8">
     <title>BuyServices</title>
@@ -8,10 +8,21 @@
 <body>
 <h1>Buy Services page</h1>
 <form method="POST" action="GoToBuyServices">
-  <p><input autofocus="autofocus" id="username" name="username" placeholder="username" type="text"/> <br/></p>
-  <p><input id="mail" name="mail" placeholder="mail" type="text"/> <br/></p>
-  <p><input id="password" name="password" placeholder="password" type="password"/> <br/></p>
-  <p><input id="submitButton" type="submit" value="Register"/></p>
+  <table border="1">
+      <tr>
+          <th><b>Service</b></th>
+          <th><b>Validity Period</b></th>
+          <th><b>Optional products</b></th>
+          <th><b>Subscription date</b></th>
+      </tr>
+      <tr th:each="servicePackage : ${servicePackages}">
+          <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}" value="${servicePackage.ID}"/></td>
+          <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
+          <td ><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" name="optionalProductID" th:text="${optionalProduct.name}" ></td>
+          <td><input type="date" name="subscriptionDate"></td>
+      </tr>
+  </table>
+    <input type="submit" value="CONFIRM">
 </form>
 </body>
 </html>
