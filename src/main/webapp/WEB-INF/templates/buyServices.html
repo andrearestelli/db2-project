@@ -16,9 +16,9 @@
           <th><b>Subscription date</b></th>
       </tr>
       <tr th:each="servicePackage : ${servicePackages}">
-          <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}" value="${servicePackage.ID}"/></td>
+          <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}" th:value="${servicePackage.ID}"/></td>
           <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
-          <td ><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" name="optionalProductID" th:text="${optionalProduct.name}" ></td>
+          <td><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" name="optionalProductID" th:value="${optionalProduct.name}" th:text="${optionalProduct.name}" ></td>
           <td><input type="date" name="subscriptionDate"></td>
       </tr>
   </table>
