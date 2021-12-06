@@ -4,29 +4,7 @@
     <meta charset="UTF-8">
     <title>BuyServices</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
-    <script>
-        function sendOptionalProducts(e){
-            var form = e.closest("form");
-            if(form.checkValidity()) {
-                var optionalProductList = Array.prototype.slice.call(form.querySelectorAll("input[name='optionalProductID']:checked"))
-                    .map(function (x){
-                        return x.value;
-                    });
-                var servicePackageID = form.querySelector("input[name = 'servicePackageSelected']:checked").value;
-                var subscriptionDate = form.querySelector("input[name = 'subscriptionDate']").value;
-                form = {
-                    "servicePackageSelected" : servicePackageID,
-                    "optionalProductID" : optionalProductList,
-                    "subscriptionDate" : subscriptionDate
-                }
-                form = JSON.stringify(form);
-                var req = new XMLHttpRequest();
-                req.open("POST", "GoToBuyServices");
-                req.setRequestHeader("Content-Type", "application/json");
-                req.send(form);
-            }
-        }
-    </script>
+    <script th:src = "@{/scripts/buyServicesScript.js}" charset="utf-8" defer></script>
 </head>
 <body>
 <h1>Buy Services page</h1>
@@ -36,15 +14,19 @@
           <th><b>Service</b></th>
           <th><b>Validity Period</b></th>
           <th><b>Optional products</b></th>
-          <th><b>Subscription date</b></th>
       </tr>
       <tr th:each="servicePackage : ${servicePackages}">
-          <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}" th:value="${servicePackage.ID}"/></td>
+          <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}"
+                     th:value="${servicePackage.ID}" onclick="enableCheckboxes(this)" required/></td>
           <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
-          <td><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" name="optionalProductID" th:value="${optionalProduct.name}" th:text="${optionalProduct.name}" ></td>
+          <td><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" disabled
+                     name="optionalProductID" th:value="${optionalProduct.name}" th:text="${optionalProduct.name}" ></td>
       </tr>
   </table>
-    <input type="date" name="subscriptionDate">
+    <div> Insert the desired starting date of subscription:
+        <input type="date" name="subscriptionDate" required>
+    </div>
+
     <input type="button" value="CONFIRM" onclick="sendOptionalProducts(this)">
 </form>
 </body>
