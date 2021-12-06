@@ -8,11 +8,12 @@
         function sendOptionalProducts(e){
             var form = e.closest("form");
             if(form.checkValidity()) {
-                var optionalProductList = Array.prototype.slice.call(form.querySelectorAll("input[name='optionalProductID']:checked")).map(function () {
-                    return this.value;
-                });
-                var servicePackageID = form.querySelector("input[name = 'servicePackageSelected']");
-                var subscriptionDate = form.querySelector("input[name = 'subscriptionDate']");
+                var optionalProductList = Array.prototype.slice.call(form.querySelectorAll("input[name='optionalProductID']:checked"))
+                    .map(function (){
+                        return this.value;
+                    });
+                var servicePackageID = form.querySelector("input[name = 'servicePackageSelected']:checked").value;
+                var subscriptionDate = form.querySelector("input[name = 'subscriptionDate']").value;
                 form = {
                     "servicePackageSelected" : servicePackageID,
                     "optionalProductID" : optionalProductList,
@@ -30,7 +31,7 @@
 <body>
 <h1>Buy Services page</h1>
 <form>
-  <table>
+  <table border="1">
       <tr>
           <th><b>Service</b></th>
           <th><b>Validity Period</b></th>
@@ -40,12 +41,11 @@
       <tr th:each="servicePackage : ${servicePackages}">
           <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}" th:value="${servicePackage.ID}"/></td>
           <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
-          <td><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" name="optionalProductID" th:value="${optionalProduct.name}" th:text="${optionalProduct.name}"></td>
-          <td><input type="date" name="subscriptionDate"></td>
-      </td>
+          <td><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" name="optionalProductID" th:value="${optionalProduct.name}" th:text="${optionalProduct.name}" ></td>
       </tr>
   </table>
-    <input type="button" class="button1" value="CONFIRM" onclick="sendOptionalProducts(this)">
+    <input type="date" name="subscriptionDate">
+    <input type="button" value="CONFIRM" onclick="sendOptionalProducts(this)">
 </form>
 </body>
 </html>
