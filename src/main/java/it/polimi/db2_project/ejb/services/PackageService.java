@@ -18,4 +18,8 @@ public class PackageService {
                                 getResultList();
     }
 
+    public ServicePackage findByID(Integer ID)
+    {
+        return em.find(ServicePackage.class,ID);
+    }
 }

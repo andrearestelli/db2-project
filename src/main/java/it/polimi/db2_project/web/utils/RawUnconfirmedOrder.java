@@ -2,16 +2,18 @@ package it.polimi.db2_project.web.utils;
 
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
 
-import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
-public class UnconfirmedOrder {
+public class RawUnconfirmedOrder {
     Integer servicePackageID;
     List<OptionalProduct> optionalProductList;
-    Date subscriptionDate;
+    String subscriptionDate;
 
-    public UnconfirmedOrder(Integer servicePackageID, List<OptionalProduct> optionalProductList, Date subscriptionDate) {
+    public RawUnconfirmedOrder(Integer servicePackageID, List<OptionalProduct> optionalProductList, String subscriptionDate) {
         this.servicePackageID = servicePackageID;
         this.optionalProductList = optionalProductList;
         this.subscriptionDate = subscriptionDate;
@@ -25,12 +27,8 @@ public class UnconfirmedOrder {
         return optionalProductList;
     }
 
-    public Date getSubscriptionDate() {
+    public String getSubscriptionDate() {
         return subscriptionDate;
-    }
-
-    public void setSubscriptionDate(Date subscriptionDate) {
-        this.subscriptionDate = subscriptionDate;
     }
 
     public void setServicePackageID(Integer servicePackageID) {
@@ -41,11 +39,11 @@ public class UnconfirmedOrder {
         this.optionalProductList = optionalProductList;
     }
 
-    public Date computeEndingDate(Date subscriptionDate, int validity_period)
-    {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(subscriptionDate);
-        calendar.add(Calendar.MONTH,validity_period);
-        return calendar.getTime();
+    public void setSubscriptionDate(String subscriptionDate) {
+        this.subscriptionDate = subscriptionDate;
+    }
+
+    public Date formatDate(String date) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 }
