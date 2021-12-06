@@ -9,8 +9,8 @@
             var form = e.closest("form");
             if(form.checkValidity()) {
                 var optionalProductList = Array.prototype.slice.call(form.querySelectorAll("input[name='optionalProductID']:checked"))
-                    .map(function (){
-                        return this.value;
+                    .map(function (x){
+                        return x.value;
                     });
                 var servicePackageID = form.querySelector("input[name = 'servicePackageSelected']:checked").value;
                 var subscriptionDate = form.querySelector("input[name = 'subscriptionDate']").value;

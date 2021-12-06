@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,16 +34,15 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         processTemplate(request,response,attributes);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        Integer servicePackage = Integer.parseInt(request.getParameter("servicePackageSelected"));
+        UnconfirmedOrder unconfirmedOrder;
+
+        BufferedReader reader = request.getReader();
         Gson gson = new Gson();
-        OptionalProductList optionalProductList = gson.fromJson((String)request.getParameter("optionalProductID"), OptionalProductList.class) ;
-        Date sub_date = null;
-        try {
-             sub_date = new SimpleDateFormat(("dd/MM/yyyy")).parse("subscriptionDate");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        UnconfirmedOrder unconfirmedOrder = new UnconfirmedOrder(servicePackage,optionalProductList.getOptionalProductList(),sub_date);
+
+        unconfirmedOrder = gson.fromJson(reader, UnconfirmedOrder.class);
+
+        // Controllare se i prodotti opzionali selezionati sono coerenti ???
+
         request.getSession().setAttribute("unconfirmedOrder",unconfirmedOrder);
         response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage");
 
