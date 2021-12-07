@@ -6,13 +6,17 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <p><b>Confirm Service</b></p>
-    <div th:text="${servicePackage.ID}"></div>
-    <div th:text="${servicePackage.validity_period}"></div>
-    <div th:text="${servicePackage.name}"></div>
-    <div th:text="${servicePackage.monthly_fee}"></div>
-    <div th:each="OptionalProduct : ${optionalProducts}" th:text="${OptionalProduct.name}"></div>
-    <div th:text="${subscriptionDate}"></div>
-    <div th:text="${endingDate}"></div>
+    <h1>Confirm order</h1>
+    <table>
+        <tr>
+            <th style="alignment: center"><b>Order Report</b></th>
+        </tr>
+        <tr><td><b>Service name</b></td><td th:text="${servicePackage.name}"></td></tr>
+        <tr><td><b>Validity Period</b></td><td th:text="${servicePackage.validity_period}"></td></tr>
+        <tr><td><b>Monthly fee</b></td><td th:text="${servicePackage.monthly_fee}"></td></tr>
+        <tr><td><b>Optional products</b></td><td th:each="OptionalProduct : ${optionalProducts}" th:text="${OptionalProduct.name}"></td></tr>
+        <tr><td><b>Subscription date</b></td><td th:text="${subscriptionDate}"></td></tr>
+        <tr><td><b>Ending date</b></td><td th:text="${endingDate}"></td></tr>
+    </table>
 </body>
 </html>
