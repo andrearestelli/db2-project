@@ -10,10 +10,10 @@ import java.util.List;
 
 public class RawUnconfirmedOrder {
     Integer servicePackageID;
-    List<OptionalProduct> optionalProductList;
+    List<String> optionalProductList;
     String subscriptionDate;
 
-    public RawUnconfirmedOrder(Integer servicePackageID, List<OptionalProduct> optionalProductList, String subscriptionDate) {
+    public RawUnconfirmedOrder(Integer servicePackageID, List<String> optionalProductList, String subscriptionDate) {
         this.servicePackageID = servicePackageID;
         this.optionalProductList = optionalProductList;
         this.subscriptionDate = subscriptionDate;
@@ -23,7 +23,7 @@ public class RawUnconfirmedOrder {
         return servicePackageID;
     }
 
-    public List<OptionalProduct> getOptionalProductList() {
+    public List<String> getOptionalProductList() {
         return optionalProductList;
     }
 
@@ -35,7 +35,7 @@ public class RawUnconfirmedOrder {
         this.servicePackageID = servicePackageID;
     }
 
-    public void setOptionalProductList(List<OptionalProduct> optionalProductList) {
+    public void setOptionalProductList(List<String> optionalProductList) {
         this.optionalProductList = optionalProductList;
     }
 

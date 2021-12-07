@@ -46,7 +46,8 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         rawUnconfirmedOrder = gson.fromJson(reader,RawUnconfirmedOrder.class);
 
         System.out.println("\nraw = "+rawUnconfirmedOrder.getServicePackageID());
-        try {
+        response.setStatus(HttpServletResponse.SC_OK);
+        /*try {
             unconfirmedOrder = new UnconfirmedOrder(rawUnconfirmedOrder.getServicePackageID(),
                     rawUnconfirmedOrder.getOptionalProductList(),
                     rawUnconfirmedOrder.formatDate(rawUnconfirmedOrder.getSubscriptionDate()));
@@ -56,7 +57,7 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
         // Controllare se i prodotti opzionali selezionati sono coerenti ???
 
 
