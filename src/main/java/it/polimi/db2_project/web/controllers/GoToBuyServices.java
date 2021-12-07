@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
+import it.polimi.db2_project.ejb.services.OptionalProductService;
 import it.polimi.db2_project.ejb.services.PackageService;
 import it.polimi.db2_project.web.utils.OptionalProductList;
 import it.polimi.db2_project.web.utils.RawUnconfirmedOrder;
@@ -27,6 +28,8 @@ import java.util.*;
 public class GoToBuyServices extends AbstractThymeleafServlet{
     @EJB(name = "it.polimi.db2_project.ejb.services.PackageService")
     private PackageService packageService;
+    @EJB(name = "it.polimi.db2_project.ejb.services.OptionalProductService")
+    private OptionalProductService optionalProductService;
 
     public GoToBuyServices() {
         super("buyServices", "WEB-INF/templates/", ".html", TemplateMode.HTML);
@@ -44,20 +47,16 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         BufferedReader reader = request.getReader();
         Gson gson = new Gson();
         rawUnconfirmedOrder = gson.fromJson(reader,RawUnconfirmedOrder.class);
-
-        System.out.println("\nraw = "+rawUnconfirmedOrder.getServicePackageID());
-        response.setStatus(HttpServletResponse.SC_OK);
-        /*try {
-            unconfirmedOrder = new UnconfirmedOrder(rawUnconfirmedOrder.getServicePackageID(),
-                    rawUnconfirmedOrder.getOptionalProductList(),
+        ServicePackage servicePackageSelected = packageService.findByID(rawUnconfirmedOrder.getServicePackageID());
+        List<OptionalProduct> optionalProducts = optionalProductService.findOptionalProductListByID(rawUnconfirmedOrder.getOptionalProductList());
+        try {
+            unconfirmedOrder = new UnconfirmedOrder(servicePackageSelected,optionalProducts,
                     rawUnconfirmedOrder.formatDate(rawUnconfirmedOrder.getSubscriptionDate()));
-            System.out.println("\nCIAO\n");
-            System.out.println("\n"+unconfirmedOrder.getServicePackageID());
             request.getSession().setAttribute("unconfirmedOrder",unconfirmedOrder);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (ParseException e) {
             e.printStackTrace();
-        }*/
+        }
         // Controllare se i prodotti opzionali selezionati sono coerenti ???
 
 

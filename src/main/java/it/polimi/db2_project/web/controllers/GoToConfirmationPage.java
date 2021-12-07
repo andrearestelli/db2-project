@@ -27,14 +27,10 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
         Map<String,Object> attributes = new HashMap<>();
-        ServicePackage servicePackage = packageService.findByID(unconfirmedOrder.getServicePackageID());
-        attributes.put("servicePackageID",servicePackage.getID());
-        attributes.put("validity_period",servicePackage.getValidity_period());
-        attributes.put("servicePackageName",servicePackage.getName());
-        attributes.put("monthlyFee",servicePackage.getMonthly_fee());
+        attributes.put("servicePackage",unconfirmedOrder.getServicePackage());
         attributes.put("optionalProducts",unconfirmedOrder.getOptionalProductList());
         attributes.put("subscriptionDate",unconfirmedOrder.getSubscriptionDate());
-        attributes.put("endingDate",unconfirmedOrder.computeEndingDate(unconfirmedOrder.getSubscriptionDate(),servicePackage.getValidity_period()));
+        attributes.put("endingDate",unconfirmedOrder.computeEndingDate(unconfirmedOrder.getSubscriptionDate(),unconfirmedOrder.getServicePackage().getValidity_period()));
         processTemplate(request,response,attributes);
     }
 

@@ -16,12 +16,12 @@ function sendOptionalProducts(trigger){
         var req = new XMLHttpRequest();
         req.open("POST", "GoToBuyServices");
         req.setRequestHeader("Content-Type", "application/json");
-    /*req.onreadystatechange = function (){
-        /*if(reqeadyState === XMLHttpRequest.DONE)
+    req.onreadystatechange = function (){
+        if(req.readyState === XMLHttpRequest.DONE)
         {
             window.location.href = "/db2_project_war_exploded/GoToConfirmationPage";
         }
-    };*/
+    };
     req.send(form);
     }
 }

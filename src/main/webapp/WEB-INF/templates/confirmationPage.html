@@ -7,10 +7,10 @@
 </head>
 <body>
     <p><b>Confirm Service</b></p>
-    <div th:text="${servicePackageID}"></div>
-    <div th:text="${validity_period}"></div>
-    <div th:text="${servicePackageName}"></div>
-    <div th:text="${monthlyFee}"></div>
+    <div th:text="${servicePackage.ID}"></div>
+    <div th:text="${servicePackage.validity_period}"></div>
+    <div th:text="${servicePackage.name}"></div>
+    <div th:text="${servicePackage.monthly_fee}"></div>
     <div th:each="OptionalProduct : ${optionalProducts}" th:text="${OptionalProduct.name}"></div>
     <div th:text="${subscriptionDate}"></div>
     <div th:text="${endingDate}"></div>

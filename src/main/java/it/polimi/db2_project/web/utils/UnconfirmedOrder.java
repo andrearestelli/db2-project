@@ -1,24 +1,26 @@
 package it.polimi.db2_project.web.utils;
 
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
+import it.polimi.db2_project.ejb.beans.Service;
+import it.polimi.db2_project.ejb.beans.ServicePackage;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class UnconfirmedOrder {
-    Integer servicePackageID;
+    private ServicePackage servicePackage;
     List<OptionalProduct> optionalProductList;
     Date subscriptionDate;
 
-    public UnconfirmedOrder(Integer servicePackageID, List<OptionalProduct> optionalProductList, Date subscriptionDate) {
-        this.servicePackageID = servicePackageID;
+    public UnconfirmedOrder(ServicePackage servicePackageID, List<OptionalProduct> optionalProductList, Date subscriptionDate) {
+        this.servicePackage = servicePackageID;
         this.optionalProductList = optionalProductList;
         this.subscriptionDate = subscriptionDate;
     }
 
-    public Integer getServicePackageID() {
-        return servicePackageID;
+    public ServicePackage getServicePackage() {
+        return servicePackage;
     }
 
     public List<OptionalProduct> getOptionalProductList() {
@@ -27,18 +29,6 @@ public class UnconfirmedOrder {
 
     public Date getSubscriptionDate() {
         return subscriptionDate;
-    }
-
-    public void setSubscriptionDate(Date subscriptionDate) {
-        this.subscriptionDate = subscriptionDate;
-    }
-
-    public void setServicePackageID(Integer servicePackageID) {
-        this.servicePackageID = servicePackageID;
-    }
-
-    public void setOptionalProductList(List<OptionalProduct> optionalProductList) {
-        this.optionalProductList = optionalProductList;
     }
 
     public Date computeEndingDate(Date subscriptionDate, int validity_period)

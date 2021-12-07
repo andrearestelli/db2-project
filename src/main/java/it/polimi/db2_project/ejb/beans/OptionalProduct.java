@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "optional_product", schema = "telcodb")
 public class OptionalProduct implements Serializable {
     @Id
+    private Integer ID;
     private String name;
     private int validity_period;
     private double monthly_fee;
@@ -24,6 +25,19 @@ public class OptionalProduct implements Serializable {
     @ManyToMany(mappedBy = "optionalProducts")
     private List<ServiceActivationSchedule> serviceActivationScheduleList;
 */
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public int getValidity_period() {
+        return validity_period;
+    }
+
+    public double getMonthly_fee() {
+        return monthly_fee;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
