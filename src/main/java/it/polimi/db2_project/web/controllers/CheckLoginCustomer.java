@@ -46,10 +46,11 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
 
         if(result.isPresent()){
             Customer customer = result.get();
-            request.getSession().setAttribute("username",customer.getUsername());
-            request.getSession().setAttribute("mail",customer.getMail());
+            request.getSession().setAttribute("user",customer);
             //Manda alla Homepage
-            response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
+            if(request.getSession().getAttribute("unconfirmedOrder")!=null)
+                response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage");
+            else response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
         }
         else{
             // ritorna messaggio di errore

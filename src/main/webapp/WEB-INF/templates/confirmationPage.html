@@ -18,5 +18,10 @@
         <tr><td><b>Subscription date</b></td><td th:text="${subscriptionDate}"></td></tr>
         <tr><td><b>Ending date</b></td><td th:text="${endingDate}"></td></tr>
     </table>
+    <form method="POST" action="GoToConfirmationPage" th:if="${logged}">
+        <input id="buyOrderButton" class="button1" type="submit" value="Buy Order"/>
+    </form>
+    <a href="CheckLoginCustomer" th:if="${!logged}" class="button1">Login</a>
+    <a href="GoToRegistrationCustomer" th:if="${!logged}" class="button1">Register</a>
 </body>
 </html>

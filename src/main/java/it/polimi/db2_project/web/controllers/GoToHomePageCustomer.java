@@ -1,5 +1,6 @@
 package it.polimi.db2_project.web.controllers;
 
+import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
 import it.polimi.db2_project.ejb.services.PackageService;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -25,9 +26,9 @@ public class GoToHomePageCustomer extends AbstractThymeleafServlet{
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> attributes = new HashMap<>();
-        if(request.getSession().getAttribute("username")!=null){
-            attributes.put("username", (String) request.getSession().getAttribute("username"));
-            attributes.put("mail", (String) request.getSession().getAttribute("mail"));
+        if(request.getSession().getAttribute("user")!=null){
+            attributes.put("username", ((Customer) request.getSession().getAttribute("user")).getUsername());
+            attributes.put("mail", ((Customer) request.getSession().getAttribute("user")).getMail());
         }
 
         List<ServicePackage> servicePackages = packageService.findAllServicePackage();
