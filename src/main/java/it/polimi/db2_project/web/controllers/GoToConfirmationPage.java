@@ -5,6 +5,7 @@ import it.polimi.db2_project.ejb.beans.ServicePackage;
 import it.polimi.db2_project.ejb.services.CustomerService;
 import it.polimi.db2_project.ejb.services.OrderService;
 import it.polimi.db2_project.ejb.services.PackageService;
+import it.polimi.db2_project.web.utils.DateHandler;
 import it.polimi.db2_project.web.utils.UnconfirmedOrder;
 import org.thymeleaf.templatemode.TemplateMode;
 
@@ -37,7 +38,7 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
         attributes.put("servicePackage",unconfirmedOrder.getServicePackage());
         attributes.put("optionalProducts",unconfirmedOrder.getOptionalProductList());
         attributes.put("subscriptionDate",unconfirmedOrder.getSubscriptionDate());
-        attributes.put("endingDate",unconfirmedOrder.computeEndingDate(unconfirmedOrder.getSubscriptionDate(),unconfirmedOrder.getServicePackage().getValidity_period()));
+        attributes.put("endingDate", DateHandler.computeEndingDate(unconfirmedOrder.getSubscriptionDate(),unconfirmedOrder.getServicePackage().getValidity_period()));
         processTemplate(request,response,attributes);
     }
 

@@ -67,4 +67,8 @@ public class ServicePackage implements Serializable {
     public List<OptionalProduct> getOptionalProducts() {
         return optionalProducts;
     }
+
+    public List<Service> getServices() {
+        return services;
+    }
 }

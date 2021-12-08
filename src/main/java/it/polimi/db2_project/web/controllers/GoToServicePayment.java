@@ -1,6 +1,9 @@
 package it.polimi.db2_project.web.controllers;
 
+import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Order;
+import it.polimi.db2_project.ejb.beans.ServiceActivationSchedule;
+import it.polimi.db2_project.ejb.services.CustomerService;
 import it.polimi.db2_project.ejb.services.OrderService;
 import it.polimi.db2_project.ejb.services.PackageService;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -17,6 +20,8 @@ import java.util.Random;
 public class GoToServicePayment extends AbstractThymeleafServlet{
     @EJB(name = "it.polimi.db2_project.ejb.services.OrderService")
     private OrderService orderService;
+    @EJB(name = "it.polimi.db2_project.ejb.services.CustomerService")
+    private CustomerService customerService;
 
     public GoToServicePayment() {
         super("paymentResultPage","WEB-INF/templates/",".html",TemplateMode.HTML);
@@ -28,10 +33,17 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
         Random rn = new Random();
         int external_service = rn.nextInt(3);
         Order.StateType stateType;
-        if(external_service == 2)
+        if (external_service == 2) {
             stateType = Order.StateType.REJECTED;
-        else stateType = Order.StateType.VALID;
+            customerService.setInsolventTrue(((Customer) request.getSession().getAttribute("user")).getUsername());
+        }
+        else {
+            stateType = Order.StateType.VALID;
+            orderService.createActivationSchedule((Customer) request.getSession().getAttribute("user"),
+                    orderService.findByID(orderID));
+        }
         orderService.setStateByID(orderID, stateType);
+        request.getSession().removeAttribute("unconfirmedOrder");
         processTemplate(request,response);
     }
 

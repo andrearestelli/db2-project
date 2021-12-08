@@ -34,12 +34,10 @@ public class CustomerService {
     public void setInsolventTrue(String username) {
         Optional customer = findCustomerByUsername(username);
         if(customer.isPresent()) ((Customer) customer.get()).setInsolvent(true);
-        //em.persist(customer);
     }
 
     public void setInsolventFalse(String username) {
         Optional customer = findCustomerByUsername(username);
         if(customer.isPresent()) ((Customer) customer.get()).setInsolvent(false);
-        //em.persist(customer);
     }
 }

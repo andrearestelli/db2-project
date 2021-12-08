@@ -14,7 +14,7 @@ public class ServiceActivationSchedule implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "user_id")
     private Customer customer;
 
     private Date activation_date;
@@ -44,5 +44,15 @@ public class ServiceActivationSchedule implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ID_opt_product")})
     private List<OptionalProduct> optionalProducts;
 
+    public ServiceActivationSchedule(Customer customer, Date activation_date, Date deactivation_date, List<Service> services, List<OptionalProduct> optionalProducts) {
+        this.customer = customer;
+        this.activation_date = activation_date;
+        this.deactivation_date = deactivation_date;
+        this.services = services;
+        this.optionalProducts = optionalProducts;
+    }
 
+    public ServiceActivationSchedule() {
+
+    }
 }

@@ -53,6 +53,30 @@ public class Order implements Serializable {
         return ID;
     }
 
+    public Date getDate_hour() {
+        return date_hour;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public int getTotal_value() {
+        return total_value;
+    }
+
+    public Date getSub_date() {
+        return sub_date;
+    }
+
+    public Customer getUserOrderer() {
+        return userOrderer;
+    }
+
+    public ServicePackage getId_package() {
+        return id_package;
+    }
+
     public void setState(StateType state) {
         this.state = state.getText();
     }

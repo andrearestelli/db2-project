@@ -2,7 +2,9 @@ package it.polimi.db2_project.ejb.services;
 
 import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Order;
+import it.polimi.db2_project.ejb.beans.ServiceActivationSchedule;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
+import it.polimi.db2_project.web.utils.DateHandler;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,4 +34,14 @@ public class OrderService {
         order.setState(stateType);
     }
 
+    public void createActivationSchedule(Customer customer, Order order)
+    {
+        ServiceActivationSchedule serviceActivationSchedule = new ServiceActivationSchedule(customer,
+                order.getSub_date(), DateHandler.computeEndingDate(order.getSub_date(),
+                order.getId_package().getValidity_period()),
+                order.getId_package().getServices(),order.getId_package().getOptionalProducts());
+        //TODO Mandare la lista di optional product selezionati
+        em.persist(serviceActivationSchedule);
+        em.flush();
+    }
 }
