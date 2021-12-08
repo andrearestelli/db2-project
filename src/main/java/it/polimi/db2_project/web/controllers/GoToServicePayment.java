@@ -41,6 +41,7 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
             stateType = Order.StateType.VALID;
             orderService.createActivationSchedule((Customer) request.getSession().getAttribute("user"),
                     orderService.findByID(orderID));
+            //TODO inviare la lista degli optional products selezionati
         }
         orderService.setStateByID(orderID, stateType);
         request.getSession().removeAttribute("unconfirmedOrder");

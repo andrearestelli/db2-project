@@ -1,13 +1,10 @@
 package it.polimi.db2_project.web.controllers;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
 import it.polimi.db2_project.ejb.services.OptionalProductService;
 import it.polimi.db2_project.ejb.services.PackageService;
-import it.polimi.db2_project.web.utils.OptionalProductList;
 import it.polimi.db2_project.web.utils.RawUnconfirmedOrder;
 import it.polimi.db2_project.web.utils.UnconfirmedOrder;
 import org.thymeleaf.templatemode.TemplateMode;

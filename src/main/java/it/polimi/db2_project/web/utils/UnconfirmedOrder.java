@@ -1,10 +1,7 @@
 package it.polimi.db2_project.web.utils;
 
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
-import it.polimi.db2_project.ejb.beans.Service;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
