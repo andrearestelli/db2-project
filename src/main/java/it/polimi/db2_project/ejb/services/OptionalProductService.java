@@ -14,8 +14,7 @@ public class OptionalProductService {
     @PersistenceContext(name = "telcoEJB")
     private EntityManager em;
 
-    public List<OptionalProduct> findOptionalProductListByID(List<Integer> optionalProductList)
-    {
+    public List<OptionalProduct> findOptionalProductListByID(List<Integer> optionalProductList) {
         List<OptionalProduct> optionalProducts = new ArrayList<>();
         for(Integer op : optionalProductList)
         {

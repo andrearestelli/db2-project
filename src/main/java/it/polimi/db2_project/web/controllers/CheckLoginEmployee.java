@@ -4,6 +4,7 @@ import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Employee;
 import it.polimi.db2_project.ejb.services.CustomerService;
 import it.polimi.db2_project.ejb.services.EmployeeService;
+import it.polimi.db2_project.web.utils.ParametersChecker;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.ejb.EJB;
@@ -11,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @WebServlet("/CheckLoginEmployee")
 public class CheckLoginEmployee extends AbstractThymeleafServlet{
@@ -24,7 +27,6 @@ public class CheckLoginEmployee extends AbstractThymeleafServlet{
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         processTemplate(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -32,20 +34,24 @@ public class CheckLoginEmployee extends AbstractThymeleafServlet{
         String password = null;
         username = request.getParameter("username");
         password = request.getParameter("password");
-        if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            //TODO ritorna errore
+
+        if(ParametersChecker.discoverInvalidParameters(Stream.of(username, password))) {
+            processTemplate(request, response, Collections.singletonMap("errorMessage",
+                    "Invalid parameters"));
+            return;
         }
+
         Optional<Employee> result = employeeService.checkCredentials(username,password);
         if(result.isPresent()){
             Employee employee = result.get();
             request.getSession().setAttribute("user",employee);
-            //TODO Manda alla Homepage
-            request.getSession().setAttribute("username",employee.getUsername());
-            //Manda alla Homepage
+            // Manda alla Homepage
             response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageEmployee");
         }
         else{
-            //TODO Ritorna errore
+            // Ritorna errore
+            processTemplate(request, response, Collections.singletonMap("errorMessage",
+                    "Invalid username or password"));
         }
     }
 

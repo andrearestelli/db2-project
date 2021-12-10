@@ -21,8 +21,10 @@ public class CustomerService {
 
     public void registerCustomer(String username, String password, String mail) {
         Customer customer = new Customer(username,password,mail);
+        // Persist to move the new created instance to the managed state
+        // Flush to ask the Persistence provider to write changes as soon as possible to the database
         em.persist(customer);
-        em.flush();//TODO comments
+        em.flush();
     }
 
     public Optional<Customer> findCustomerByUsername(String username) {
@@ -33,12 +35,14 @@ public class CustomerService {
 
     public void setInsolventTrue(Customer customer) {
         customer.setInsolvent(true);
-        em.merge(customer);//TODO commentare
+        // Merge used to change the state of customer to managed from detached
+        em.merge(customer);
     }
 
     public void setInsolventFalse(Customer customer) {
         customer.setInsolvent(false);
-        em.merge(customer);//TODO commentare
+        // Merge used to change the state of customer to managed from detached
+        em.merge(customer);
     }
 
 

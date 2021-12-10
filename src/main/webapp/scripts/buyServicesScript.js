@@ -16,21 +16,20 @@ function sendOptionalProducts(trigger){
         var req = new XMLHttpRequest();
         req.open("POST", "GoToBuyServices");
         req.setRequestHeader("Content-Type", "application/json");
-    req.onreadystatechange = function (){
-        if(req.readyState === XMLHttpRequest.DONE)
-        {
-            window.location.href = "/db2_project_war_exploded/GoToConfirmationPage?orderID=0";
-        }
-    };
-    req.send(form);
+        req.onreadystatechange = function (){
+            if(req.readyState === XMLHttpRequest.DONE)
+            {
+                window.location.href = "/db2_project_war_exploded/GoToConfirmationPage?orderID=0";
+            }
+        };
+        req.send(form);
     }
 }
 
 function enableCheckboxes(selected){
-document.querySelectorAll("input[type = 'checkbox']").forEach(value => value.checked = false);
-document.querySelectorAll("input[type = 'checkbox']").forEach(value => value.disabled = true);
-console.log(document.querySelectorAll("input[type = 'checkbox']"))
-var tableRow = selected.closest("tr");
-console.log(tableRow);
-tableRow.querySelectorAll("input[type = 'checkbox']").forEach(value => value.disabled = false);
+    document.querySelectorAll("input[type = 'checkbox']").forEach(value => value.checked = false);
+    document.querySelectorAll("input[type = 'checkbox']").forEach(value => value.disabled = true);
+
+    var tableRow = selected.closest("tr");
+    tableRow.querySelectorAll("input[type = 'checkbox']").forEach(value => value.disabled = false);
 }

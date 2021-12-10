@@ -34,7 +34,6 @@ public class GoToHomePageCustomer extends AbstractThymeleafServlet{
         if(customer!=null){
             attributes.put("username", customer.getUsername());
             attributes.put("mail", customer.getMail());
-            System.out.println(customer.isInsolvent());
             attributes.put("insolvent",customer.isInsolvent());
             if(customer.isInsolvent()){
                 List<Order> rejectedOrders = orderService.findRejectedOrdersByUser(customer);

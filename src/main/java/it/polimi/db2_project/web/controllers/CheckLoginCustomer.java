@@ -25,8 +25,6 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-
         processTemplate(request, response);
     }
 
@@ -47,13 +45,13 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
         if(result.isPresent()){
             Customer customer = result.get();
             request.getSession().setAttribute("user",customer);
-            //Manda alla Homepage
+            // Manda alla Homepage
             if(request.getSession().getAttribute("unconfirmedOrder")!=null)
                 response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage?orderID=0");
             else response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
         }
         else{
-            // ritorna messaggio di errore
+            // Ritorna messaggio di errore
             processTemplate(request, response, Collections.singletonMap("errorMessage",
                     "Invalid username or password"));
         }

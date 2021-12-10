@@ -16,8 +16,10 @@ public class OrderService {
 
     public Integer createOrder(Date date_hour, double total_value, Date sub_date, Customer user_order, ServicePackage servicePackage, List<OptionalProduct> optionalProductList) {
         Order order = new Order(date_hour,total_value,sub_date,user_order,servicePackage,optionalProductList);
+        // Persist to move the new created instance to the managed state
+        // Flush to ask the Persistence provider to write changes as soon as possible to the database
         em.persist(order);
-        em.flush();//TODO comments
+        em.flush();
         return order.getID();
     }
 
@@ -26,19 +28,18 @@ public class OrderService {
         return em.find(Order.class,ID);
     }
 
-    public void setStateByID(Integer ID, Order.StateType stateType)
-    {
+    public void setStateByID(Integer ID, Order.StateType stateType) {
         Order order = em.find(Order.class,ID);
         order.setState(stateType);
     }
 
-    public void createActivationSchedule(Customer customer, Order order)
-    {
+    public void createActivationSchedule(Customer customer, Order order) {
         ServiceActivationSchedule serviceActivationSchedule = new ServiceActivationSchedule(customer,
                 order.getSub_date(), DateHandler.computeEndingDate(order.getSub_date(),
                 order.getId_package().getValidity_period()),
                 order.getId_package().getServices(),order.getOptionalProducts());
-        //TODO Mandare la lista di optional product selezionati
+        // Persist to move the new created instance to the managed state
+        // Flush to ask the Persistence provider to write changes as soon as possible to the database
         em.persist(serviceActivationSchedule);
         em.flush();
     }
