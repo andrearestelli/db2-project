@@ -19,7 +19,7 @@ function sendOptionalProducts(trigger){
     req.onreadystatechange = function (){
         if(req.readyState === XMLHttpRequest.DONE)
         {
-            window.location.href = "/db2_project_war_exploded/GoToConfirmationPage";
+            window.location.href = "/db2_project_war_exploded/GoToConfirmationPage?orderID=0";
         }
     };
     req.send(form);

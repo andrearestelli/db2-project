@@ -11,6 +11,7 @@ public class UnconfirmedOrder {
     private final Date subscriptionDate;
     private double totalPrice;
 
+
     public UnconfirmedOrder(ServicePackage servicePackageID, List<OptionalProduct> optionalProductList, Date subscriptionDate) {
         this.servicePackage = servicePackageID;
         this.optionalProductList = optionalProductList;

@@ -32,6 +32,7 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
+        Integer orderID = Integer.parseInt(request.getParameter("orderID"));
         Map<String,Object> attributes = new HashMap<>();
         boolean logged = request.getSession().getAttribute("user") != null;
         attributes.put("logged",logged);
@@ -40,13 +41,18 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
         attributes.put("subscriptionDate",unconfirmedOrder.getSubscriptionDate());
         attributes.put("endingDate", DateHandler.computeEndingDate(unconfirmedOrder.getSubscriptionDate(),unconfirmedOrder.getServicePackage().getValidity_period()));
         attributes.put("totalPrice", unconfirmedOrder.getTotalPrice());
+        if(orderID != 0)
+            attributes.put("orderID",orderID);
         processTemplate(request,response,attributes);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
-        int orderID = orderService.createOrder(new Date(),unconfirmedOrder.getTotalPrice(),unconfirmedOrder.getSubscriptionDate(),
+        Integer orderID;
+        if(request.getParameter("orderID")!=null)
+            orderID = Integer.parseInt(request.getParameter("orderID"));
+        else orderID = orderService.createOrder(new Date(),unconfirmedOrder.getTotalPrice(),unconfirmedOrder.getSubscriptionDate(),
                 (Customer) request.getSession().getAttribute("user"),
                 unconfirmedOrder.getServicePackage(),unconfirmedOrder.getOptionalProductList());
         response.sendRedirect(getServletContext().getContextPath()+"/GoToServicePayment?"+"orderID="+orderID);

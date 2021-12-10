@@ -18,12 +18,19 @@
             <th><b>Service Package</b></th>
             <th><b>Date hour</b></th>
             <th><b>Total value</b></th>
+            <th><b></b></th>
         </tr>
         <tr th:each="order : ${rejectedOrders}">
             <td th:text="${order.ID}"></td>
             <td th:text="${order.id_package.name}"></td>
             <td th:text="${order.date_hour}"></td>
             <td th:text="${order.total_value}"></td>
+            <td>
+                <form action="GoToResumeOrder" method="get">
+                    <input type="hidden" name="IDorder" th:value="${order.ID}">
+                    <input class="button1" type="submit" value="Resume">
+                </form>
+            </td>
         </tr>
     </table>
     <table>

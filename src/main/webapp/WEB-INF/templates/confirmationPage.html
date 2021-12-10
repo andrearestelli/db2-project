@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Confirm order</h1>
+    <p th:if="${orderID!=null}">Resuming your rejected order number <span th:text="${orderID}"></span>!</p>
     <table>
         <tr>
             <th style="alignment: center"><b>Order Report</b></th>
@@ -20,6 +21,7 @@
         <tr><td><b>Total Price</b></td><td th:text="${totalPrice}"></td></tr>
     </table>
     <form method="POST" action="GoToConfirmationPage" th:if="${logged}">
+        <input type="hidden" name="orderID" th:if="${orderID!=null}" th:value="${orderID}">
         <input id="buyOrderButton" class="button1" type="submit" value="Buy Order"/>
     </form>
     <a href="CheckLoginCustomer" th:if="${!logged}" class="button1">Login</a>

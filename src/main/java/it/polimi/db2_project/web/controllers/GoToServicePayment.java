@@ -39,10 +39,9 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
             customerService.setInsolventTrue(((Customer) request.getSession().getAttribute("user")));
         }
         else {
-            stateType = Order.StateType.REJECTED;
+            stateType = Order.StateType.VALID;
             orderService.createActivationSchedule((Customer) request.getSession().getAttribute("user"),
                     orderService.findByID(orderID));
-            //TODO inviare la lista degli optional products selezionati
         }
 
         // Update state of order in db

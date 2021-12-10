@@ -33,10 +33,12 @@ public class CustomerService {
 
     public void setInsolventTrue(Customer customer) {
         customer.setInsolvent(true);
+        em.merge(customer);//TODO commentare
     }
 
     public void setInsolventFalse(Customer customer) {
         customer.setInsolvent(false);
+        em.merge(customer);//TODO commentare
     }
 
 
