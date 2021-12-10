@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://xmlns.jcp.org/jsf/html">
 <head>
     <meta charset="UTF-8">
     <title>Payment Result Page</title>
 </head>
 <body>
-    <h1>Payment Result</h1>
+    <p th:if="${orderOutcome}">Your payment has been <b>accepted</b>!</p>
+    <p th:if="${!orderOutcome}">Your payment has been <b>rejected</b>!</p>
+
+    <p><a href="GoToHomePageCustomer">Return to the home page</a></p>
 </body>
 </html>
