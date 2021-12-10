@@ -38,12 +38,20 @@
             <th><b>ID</b></th>
             <th><b>Name</b></th>
             <th><b>Validity period</b></th>
+            <th><b>Services</b></th>
             <th><b>Monthly fee</b></th>
         </tr>
         <tr th:each="servicePackage : ${servicePackages}">
             <td th:text="${servicePackage.ID}"></td>
             <td th:text="${servicePackage.name}"></td>
             <td th:text="${servicePackage.validity_period}"></td>
+            <td>
+                <table class="table1">
+                    <tr th:each="service : ${servicePackage.services}">
+                        <td th:text="${service.type}"></td>
+                    </tr>
+                </table>
+            </td>
             <td th:text="${servicePackage.monthly_fee}"></td>
         </tr>
     </table>

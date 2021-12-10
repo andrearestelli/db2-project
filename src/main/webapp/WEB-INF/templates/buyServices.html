@@ -19,8 +19,19 @@
           <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}"
                      th:value="${servicePackage.ID}" onclick="enableCheckboxes(this)" required/></td>
           <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
-          <td><input th:each="optionalProduct : ${servicePackage.optionalProducts}" type="checkbox" disabled
-                     name="optionalProductID" th:value="${optionalProduct.ID}" th:text="${optionalProduct.name}" ></td>
+          <td>
+              <table class="table1">
+                  <tr th:each="optionalProduct : ${servicePackage.optionalProducts}">
+                      <td>
+                          <input  type="checkbox" disabled
+                                  name="optionalProductID" th:value="${optionalProduct.ID}" th:text="${optionalProduct.name}" >
+                      </td>
+                      <td th:text="${optionalProduct.monthly_fee}">
+                      </td>
+                  </tr>
+              </table>
+
+          </td>
       </tr>
   </table>
     <div> Insert the desired starting date of subscription:

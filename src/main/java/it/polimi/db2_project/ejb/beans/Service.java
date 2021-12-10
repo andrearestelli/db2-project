@@ -30,6 +30,9 @@ public class Service implements Serializable {
         this.ID = id;
     }
 
+    public String getType() {
+        return type;
+    }
 
     public Integer getID() {
         return ID;
