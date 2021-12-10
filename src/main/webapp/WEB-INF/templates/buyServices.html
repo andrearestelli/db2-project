@@ -21,12 +21,12 @@
           <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
           <td>
               <table class="table1">
-                  <tr th:each="optionalProduct : ${servicePackage.optionalProducts}">
-                      <td>
+                  <tr class="tr1" th:each="optionalProduct : ${servicePackage.optionalProducts}">
+                      <td class="td1">
                           <input  type="checkbox" disabled
                                   name="optionalProductID" th:value="${optionalProduct.ID}" th:text="${optionalProduct.name}" >
                       </td>
-                      <td th:text="${optionalProduct.monthly_fee}">
+                      <td class="td1" th:text="${optionalProduct.monthly_fee}">
                       </td>
                   </tr>
               </table>
@@ -38,7 +38,7 @@
         <input type="date" name="subscriptionDate" required>
     </div>
 
-    <input type="button" value="CONFIRM" onclick="sendOptionalProducts(this)">
+    <input type="button" value="CONFIRM" class="button1" onclick="sendOptionalProducts(this)">
 </form>
 </body>
 </html>

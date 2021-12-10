@@ -18,9 +18,9 @@
         <tr><td><b>Optional products</b></td>
             <td>
                 <table class="table1">
-                    <tr th:each="OptionalProduct : ${optionalProducts}">
-                        <td th:text="${OptionalProduct.name}"></td>
-                        <td th:text="${OptionalProduct.monthly_fee}"></td>
+                    <tr class="tr1" th:each="OptionalProduct : ${optionalProducts}">
+                        <td class="td1" th:text="${OptionalProduct.name}"></td>
+                        <td class="td1" th:text="${OptionalProduct.monthly_fee}"></td>
                     </tr>
                 </table>
             </td>

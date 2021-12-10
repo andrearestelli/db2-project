@@ -20,6 +20,7 @@ table {
     align-content: center;
     position: relative;
     left: auto;
+    border-collapse: collapse;
     right: auto;
     top: auto;
     margin: auto;
@@ -45,15 +46,25 @@ table caption {
 }
 
 table tr {
-    border: 0.5px solid ;
+    border: 0.2px solid ;
     padding: .35em;
 }
 table th,
 table td {
-    border: 0.5px solid;
+    border: 0.2px solid;
     padding: .625em;
     text-align: center;
 }
+.tr1{
+    border: 0;
+    padding: .05em;
+}
+.td1{
+    border: 0;
+    padding: .07em;
+    text-align: center;
+}
+
 
 table th {
     font-size: .85em;

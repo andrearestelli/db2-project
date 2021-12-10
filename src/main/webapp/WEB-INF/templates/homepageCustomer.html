@@ -47,8 +47,8 @@
             <td th:text="${servicePackage.validity_period}"></td>
             <td>
                 <table class="table1">
-                    <tr th:each="service : ${servicePackage.services}">
-                        <td th:text="${service.type}"></td>
+                    <tr class="tr1" th:each="service : ${servicePackage.services}">
+                        <td class="td1" th:text="${service.type}"></td>
                     </tr>
                 </table>
             </td>
