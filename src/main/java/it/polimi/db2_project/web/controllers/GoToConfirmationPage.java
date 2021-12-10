@@ -39,6 +39,7 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
         attributes.put("optionalProducts",unconfirmedOrder.getOptionalProductList());
         attributes.put("subscriptionDate",unconfirmedOrder.getSubscriptionDate());
         attributes.put("endingDate", DateHandler.computeEndingDate(unconfirmedOrder.getSubscriptionDate(),unconfirmedOrder.getServicePackage().getValidity_period()));
+        attributes.put("totalPrice", unconfirmedOrder.getTotalPrice());
         processTemplate(request,response,attributes);
     }
 

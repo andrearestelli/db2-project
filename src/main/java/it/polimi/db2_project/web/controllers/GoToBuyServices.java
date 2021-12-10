@@ -49,6 +49,7 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         try {
             unconfirmedOrder = new UnconfirmedOrder(servicePackageSelected,optionalProducts,
                     rawUnconfirmedOrder.formatDate(rawUnconfirmedOrder.getSubscriptionDate()));
+            unconfirmedOrder.computeTotalPrice();
             request.getSession().setAttribute("unconfirmedOrder",unconfirmedOrder);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (ParseException e) {
