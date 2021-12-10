@@ -24,6 +24,7 @@ public class Customer implements Serializable {
     private String username;
     private String password;
     private String mail;
+    @Column (name = "insolvent")
     private boolean insolvent;
 
     public Customer(String username, String password, String mail) {
@@ -54,6 +55,10 @@ public class Customer implements Serializable {
 
     public String getMail() {
         return mail;
+    }
+
+    public boolean isInsolvent() {
+        return insolvent;
     }
 
     public String getUsername() {

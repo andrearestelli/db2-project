@@ -46,9 +46,9 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
-        int orderID = orderService.createOrder(new Date(),50,unconfirmedOrder.getSubscriptionDate(),
+        int orderID = orderService.createOrder(new Date(),unconfirmedOrder.getTotalPrice(),unconfirmedOrder.getSubscriptionDate(),
                 (Customer) request.getSession().getAttribute("user"),
-                unconfirmedOrder.getServicePackage());
+                unconfirmedOrder.getServicePackage(),unconfirmedOrder.getOptionalProductList());
         response.sendRedirect(getServletContext().getContextPath()+"/GoToServicePayment?"+"orderID="+orderID);
     }
 }

@@ -31,13 +31,13 @@ public class CustomerService {
                 .getResultStream().findFirst();
     }
 
-    public void setInsolventTrue(String username) {
-        Optional customer = findCustomerByUsername(username);
-        if(customer.isPresent()) ((Customer) customer.get()).setInsolvent(true);
+    public void setInsolventTrue(Customer customer) {
+        customer.setInsolvent(true);
     }
 
-    public void setInsolventFalse(String username) {
-        Optional customer = findCustomerByUsername(username);
-        if(customer.isPresent()) ((Customer) customer.get()).setInsolvent(false);
+    public void setInsolventFalse(Customer customer) {
+        customer.setInsolvent(false);
     }
+
+
 }

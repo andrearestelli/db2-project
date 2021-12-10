@@ -36,10 +36,10 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
         Order.StateType stateType;
         if (external_service == 2) {
             stateType = Order.StateType.REJECTED;
-            customerService.setInsolventTrue(((Customer) request.getSession().getAttribute("user")).getUsername());
+            customerService.setInsolventTrue(((Customer) request.getSession().getAttribute("user")));
         }
         else {
-            stateType = Order.StateType.VALID;
+            stateType = Order.StateType.REJECTED;
             orderService.createActivationSchedule((Customer) request.getSession().getAttribute("user"),
                     orderService.findByID(orderID));
             //TODO inviare la lista degli optional products selezionati

@@ -20,6 +20,8 @@ public class OptionalProduct implements Serializable {
     @ManyToMany(mappedBy = "optionalProducts")
     private List<ServicePackage> servicePackagesOwner;
 
+    @ManyToMany(mappedBy = "optionalProducts")
+    private List<Order> orders;
 
     // TODO verificare necessità
     @ManyToMany(mappedBy = "optionalProducts")

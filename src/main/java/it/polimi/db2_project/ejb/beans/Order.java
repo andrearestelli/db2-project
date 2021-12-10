@@ -3,25 +3,36 @@ package it.polimi.db2_project.ejb.beans;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "order", schema = "telcodb")
+@NamedQueries(
+        {
+                @NamedQuery(name = "Order.findRejectedOrdersByUser"
+                        ,query = "Select o " +
+                        "FROM Order o " +
+                        "WHERE o.userOrderer = :username AND o.state = :statetype ")
+        }
+)
+
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
     private Date date_hour;
-    private String state; // TODO fare enum
-    private int total_value;
+    private String state;
+    private double total_value;
     private Date sub_date;
 
-    public Order(Date date_hour, int total_value, Date sub_date, Customer userOrderer, ServicePackage id_package) {
+    public Order(Date date_hour, double total_value, Date sub_date, Customer userOrderer, ServicePackage id_package, List<OptionalProduct> optionalProducts) {
         this.date_hour = date_hour;
         this.total_value = total_value;
         this.state = StateType.PENDING.getText();
         this.sub_date = sub_date;
         this.userOrderer = userOrderer;
         this.id_package = id_package;
+        this.optionalProducts = optionalProducts;
     }
     public enum StateType{
         VALID("VALID"),REJECTED("REJECTED"),PENDING("PENDING");
@@ -40,6 +51,14 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_package")
     private ServicePackage id_package;
+
+    @ManyToMany
+    @JoinTable(
+            name = "order_opt_product_link",
+            joinColumns = {
+                    @JoinColumn(name = "IDorder")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_optional_product")})
+    private List<OptionalProduct> optionalProducts;
 
     public Order() {
 
@@ -61,7 +80,7 @@ public class Order implements Serializable {
         return state;
     }
 
-    public int getTotal_value() {
+    public double getTotal_value() {
         return total_value;
     }
 
@@ -75,6 +94,10 @@ public class Order implements Serializable {
 
     public ServicePackage getId_package() {
         return id_package;
+    }
+
+    public List<OptionalProduct> getOptionalProducts() {
+        return optionalProducts;
     }
 
     public void setState(StateType state) {

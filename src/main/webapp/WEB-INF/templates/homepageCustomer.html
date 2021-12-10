@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://xmlns.jcp.org/jsf/html">
 <head>
     <meta charset="UTF-8">
     <title>HomePageCustomer</title>
@@ -12,6 +12,20 @@
     </a>
     <a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
     <a href="GoToBuyServices" class="button1">Buy Services</a>
+    <table th:if="${insolvent}">
+        <tr>
+            <th><b>ID Order</b></th>
+            <th><b>Service Package</b></th>
+            <th><b>Date hour</b></th>
+            <th><b>Total value</b></th>
+        </tr>
+        <tr th:each="order : ${rejectedOrders}">
+            <td th:text="${order.ID}"></td>
+            <td th:text="${order.id_package.name}"></td>
+            <td th:text="${order.date_hour}"></td>
+            <td th:text="${order.total_value}"></td>
+        </tr>
+    </table>
     <table>
         <tr>
             <th><b>ID</b></th>
