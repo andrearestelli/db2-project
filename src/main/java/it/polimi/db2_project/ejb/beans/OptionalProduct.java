@@ -1,9 +1,6 @@
 package it.polimi.db2_project.ejb.beans;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,6 +8,7 @@ import java.util.List;
 @Table(name = "optional_product", schema = "telcodb")
 public class OptionalProduct implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
     private String name;
     private int validity_period;
@@ -26,7 +24,17 @@ public class OptionalProduct implements Serializable {
     // TODO verificare necessità
     @ManyToMany(mappedBy = "optionalProducts")
     private List<ServiceActivationSchedule> serviceActivationScheduleList;
-*/
+    */
+
+    public OptionalProduct(){
+
+    }
+
+    public OptionalProduct(String name, int validityPeriod, double monthlyFee){
+        this.name = name;
+        this.validity_period = validityPeriod;
+        this.monthly_fee = monthlyFee;
+    }
 
     public Integer getID() {
         return ID;

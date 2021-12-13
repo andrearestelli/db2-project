@@ -46,7 +46,7 @@ public class Service implements Serializable {
         this.ID = id;
     }
 
-    public String getType() {
+    public ServiceType getType() {
         return type;
     }
 

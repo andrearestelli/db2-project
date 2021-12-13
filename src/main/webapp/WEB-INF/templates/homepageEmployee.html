@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://xmlns.jcp.org/jsf/html">
 <head>
     <meta charset="UTF-8">
     <title>HomePageEmployee</title>
@@ -7,5 +7,28 @@
 </head>
 <body>
 <p><b>Welcome back <span th:text="${username}"></span>!</b></p>
+<p>Here you can create an optional product
+    <div>
+        <form method="POST" action="CreateOptionalProduct">
+            <div>
+                <label> Name:
+                    <input type="text" name="name" required>
+                </label>
+            </div>
+            <div>
+                <label> Validity Period:
+                    <input type="number" name="validity_period" required><span> months</span>
+                </label>
+            </div>
+            <div>
+                <label>Monthly Fee
+                    <span>&euro; </span><input type="number" name="monthly_fee" required>
+                </label>
+            </div>
+            <div>
+                <input class="button1" type="submit" value="Create">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

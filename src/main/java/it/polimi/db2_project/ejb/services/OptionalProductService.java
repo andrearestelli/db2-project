@@ -23,4 +23,12 @@ public class OptionalProductService {
         return optionalProducts;
     }
 
+    public void createOptionalProduct(String name, int validityPeriod, double monthlyFee){
+        OptionalProduct optionalProduct = new OptionalProduct(name, validityPeriod, monthlyFee);
+        // Persist to move the new created instance to the managed state
+        // Flush to ask the Persistence provider to write changes as soon as possible to the database
+        em.persist(optionalProduct);
+        em.flush();
+    }
+
 }
