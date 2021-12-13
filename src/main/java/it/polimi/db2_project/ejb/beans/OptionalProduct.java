@@ -6,6 +6,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "optional_product", schema = "telcodb")
+@NamedQueries(
+        {
+                @NamedQuery(name = "OptionalProduct.findAllOptionalProduct"
+                        ,query = "Select op " +
+                        "FROM OptionalProduct op ")
+        }
+)
 public class OptionalProduct implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

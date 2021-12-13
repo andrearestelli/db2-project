@@ -23,6 +23,11 @@ public class OptionalProductService {
         return optionalProducts;
     }
 
+    public List<OptionalProduct> findAllOptionalProduct() {
+        return em.createNamedQuery("OptionalProduct.findAllOptionalProduct",
+                OptionalProduct.class).getResultList();
+    }
+
     public void createOptionalProduct(String name, int validityPeriod, double monthlyFee){
         OptionalProduct optionalProduct = new OptionalProduct(name, validityPeriod, monthlyFee);
         // Persist to move the new created instance to the managed state

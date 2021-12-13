@@ -6,11 +6,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "service", schema = "telcodb")
+@NamedQueries(
+        {
+                @NamedQuery(name = "Service.findAllServices"
+                        ,query = "Select s " +
+                        "FROM Service s ")
+        }
+)
 public class Service implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer ID;
-    private ServiceType type;
+    private String type;
     private int minutes;
     private int sms;
     private float fee_minutes;
@@ -46,7 +53,7 @@ public class Service implements Serializable {
         this.ID = id;
     }
 
-    public ServiceType getType() {
+    public String getType() {
         return type;
     }
 

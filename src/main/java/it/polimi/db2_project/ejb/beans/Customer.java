@@ -25,13 +25,13 @@ public class Customer implements Serializable {
     private String password;
     private String mail;
     @Column (name = "insolvent")
-    private boolean insolvent;
+    private Integer insolvent;
 
     public Customer(String username, String password, String mail) {
         this.username = username;
         this.password = password;
         this.mail = mail;
-        this.insolvent = false;
+        this.insolvent = 0;
     }
 
     @OneToMany(mappedBy = "userOrderer")
@@ -51,14 +51,16 @@ public class Customer implements Serializable {
         this.username = username;
     }
 
-    public void setInsolvent(boolean insolvent) {this.insolvent = insolvent;}
+    public void addInsolvent() {this.insolvent++;}
+
+    public void decrementInsolvent(){this.insolvent--;}
 
     public String getMail() {
         return mail;
     }
 
     public boolean isInsolvent() {
-        return insolvent;
+        return insolvent!=0;
     }
 
     public String getUsername() {

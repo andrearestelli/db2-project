@@ -33,17 +33,19 @@ public class CustomerService {
                 .getResultStream().findFirst();
     }
 
-    public void setInsolventTrue(Customer customer) {
-        customer.setInsolvent(true);
+    public void addInsolvent(Customer customer) {
+        customer.addInsolvent();
         // Merge used to change the state of customer to managed from detached
         em.merge(customer);
     }
 
-    public void setInsolventFalse(Customer customer) {
-        customer.setInsolvent(false);
+    /*
+    //TODO Valutare se rimuovere
+    public void decrementInsolvent(Customer customer) {
+        customer.decrementInsolvent();
         // Merge used to change the state of customer to managed from detached
         em.merge(customer);
-    }
+    }*/
 
 
 }

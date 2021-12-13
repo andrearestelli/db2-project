@@ -2,10 +2,8 @@ package it.polimi.db2_project.web.controllers;
 
 import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Order;
-import it.polimi.db2_project.ejb.beans.ServiceActivationSchedule;
 import it.polimi.db2_project.ejb.services.CustomerService;
 import it.polimi.db2_project.ejb.services.OrderService;
-import it.polimi.db2_project.ejb.services.PackageService;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.ejb.EJB;
@@ -36,7 +34,8 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
         Order.StateType stateType;
         if (external_service == 2) {
             stateType = Order.StateType.REJECTED;
-            customerService.setInsolventTrue(((Customer) request.getSession().getAttribute("user")));
+            //TODO Valutare con triggers
+            customerService.addInsolvent(((Customer) request.getSession().getAttribute("user")));
         }
         else {
             stateType = Order.StateType.VALID;
