@@ -1,5 +1,6 @@
 package it.polimi.db2_project.web.controllers;
 
+import it.polimi.db2_project.ejb.beans.Employee;
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
 import it.polimi.db2_project.ejb.services.CustomerService;
 import it.polimi.db2_project.ejb.services.EmployeeService;
@@ -26,7 +27,7 @@ public class GoToHomePageEmployee extends AbstractThymeleafServlet{
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("username", (String) request.getSession().getAttribute("username"));
+        attributes.put("username",((Employee)request.getSession().getAttribute("user")).getUsername());
         attributes.put("services",employeeService.findAllServices());
         attributes.put("optionalProducts",optionalProductService.findAllOptionalProduct());
         processTemplate(request, response, attributes);

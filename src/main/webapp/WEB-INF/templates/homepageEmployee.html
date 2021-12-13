@@ -7,8 +7,7 @@
     <script th:src = "@{/scripts/createServicePackageScript.js}" charset="utf-8" defer></script>
 </head>
 <body>
-<p><b>Welcome back <span th:text="${username}"></span>!</b></p>
-
+<a class="username"><p><b>Welcome back <span th:text="${username}"></span>!</b></p></a>
 <p>Here you can create a Service Package
 <form>
     <div class="tab">Name:
@@ -39,15 +38,11 @@
         </table>
         </p>
     </div>
-    <div style="overflow:auto;">
-    <div style="float:right;">
+    <div>
         <button type="button" class="button1" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
         <button type="button" class="button1" id="nextBtn" onclick="nextPrev(1)">Next</button>
     </div>
-</div>
     <div style="text-align:center;margin-top:40px;">
-        <span class="step"></span>
-        <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
     </div>
