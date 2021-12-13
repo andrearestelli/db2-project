@@ -65,6 +65,15 @@ table td {
     text-align: center;
 }
 
+.tr2{
+    border: 0;
+    padding: .05em;
+}
+.td2{
+    border: 0;
+    padding: .07em;
+    text-align: center;
+}
 
 table th {
     font-size: .85em;

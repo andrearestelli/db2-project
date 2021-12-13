@@ -43,6 +43,17 @@ public class ServicePackage implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ID_service")})
     private List<Service> services;
 
+    public ServicePackage(){
+
+    }
+
+    public ServicePackage(String name, int validity_period, double monthly_fee, List<OptionalProduct> optionalProducts, List<Service> services) {
+        this.name = name;
+        this.validity_period = validity_period;
+        this.monthly_fee = monthly_fee;
+        this.optionalProducts = optionalProducts;
+        this.services = services;
+    }
 
     public void setID(Integer id) {
         this.ID = id;

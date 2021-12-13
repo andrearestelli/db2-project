@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>HomePageEmployee</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
+    <script th:src = "@{/scripts/createServicePackageScript.js}" charset="utf-8" defer></script>
 </head>
 <body>
 <p><b>Welcome back <span th:text="${username}"></span>!</b></p>
@@ -12,14 +13,14 @@
 <form>
     <div class="tab">Name:
         <p><input placeholder="Name" type="text" class="username" name="name" required></p>
-        <p><input placeholder="Validity period"  type="number" class="username" name="validityPeriod" required></p>
+        <p><input placeholder="Validity period"  id="validityPeriod" type="number" class="username" name="validityPeriod" required></p>
         <p><input placeholder="Monthly fee"  type="text" class="username" name="monthlyFee" required></p>
     </div>
     <div class="tab">Insert services:
         <p><table class="table1">
             <tr class="tr1" th:each="service : ${services}">
                 <td class="td1">
-                    <input  type="checkbox" disabled
+                    <input  type="checkbox"
                             name="serviceID" th:value="${service.ID}" th:text="${service.ID}" >  <span th:text="${service.type}"></span>
                 </td>
             </tr>
@@ -28,10 +29,11 @@
         <p>
         <p>Insert optional Products:</p>
         <table class="table1">
-            <tr class="tr1" th:each="optionalProduct : ${optionalProducts}">
-                <td class="td1">
-                    <input  type="checkbox" disabled
+            <tr class="tr2" th:each="optionalProduct : ${optionalProducts}">
+                <td class="td2">
+                    <input  type="checkbox"
                             name="optionalProductID" th:value="${optionalProduct.ID}" th:text="${optionalProduct.name}" >
+                    <span id="optionalProductValidityPeriod" style="display: none" th:text="${optionalProduct.validity_period}"></span>
                 </td>
             </tr>
         </table>
@@ -86,11 +88,13 @@
         //... and fix the Previous/Next buttons:
         if (n == 0) {
             document.getElementById("prevBtn").style.display = "none";
+            clearOptionalProductsShown();
         } else {
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == (x.length - 1)) {
             document.getElementById("nextBtn").innerHTML = "Submit";
+            enableAllowedOptionalProducts();
         } else {
             document.getElementById("nextBtn").innerHTML = "Next";
         }
