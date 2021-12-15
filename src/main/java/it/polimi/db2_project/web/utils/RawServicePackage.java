@@ -3,19 +3,14 @@ package it.polimi.db2_project.web.utils;
 import java.util.List;
 
 public class RawServicePackage {
-    private Integer ID;
-    private String name;
+    private String servicePackageName;
     private Integer validityPeriod;
-    private double monthly_fee;
-    private List<Integer> services;
-    private List<Integer> optionalProducts;
-
-    public Integer getID() {
-        return ID;
-    }
+    private double monthlyFee;
+    private List<Integer> serviceList;
+    private List<Integer> optionalProductList;
 
     public String getName() {
-        return name;
+        return servicePackageName;
     }
 
     public Integer getValidityPeriod() {
@@ -23,14 +18,14 @@ public class RawServicePackage {
     }
 
     public double getMonthly_fee() {
-        return monthly_fee;
+        return monthlyFee;
     }
 
     public List<Integer> getServices() {
-        return services;
+        return serviceList;
     }
 
     public List<Integer> getOptionalProducts() {
-        return optionalProducts;
+        return optionalProductList;
     }
 }

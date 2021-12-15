@@ -53,12 +53,8 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
             request.getSession().setAttribute("unconfirmedOrder",unconfirmedOrder);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (ParseException e) {
-            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
         // Controllare se i prodotti opzionali selezionati sono coerenti ???
-
-
-        //response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage");
-
     }
 }
