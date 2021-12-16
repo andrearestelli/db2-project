@@ -51,10 +51,6 @@ public class Customer implements Serializable {
         this.username = username;
     }
 
-    public void addInsolvent() {this.insolvent++;}
-
-    public void decrementInsolvent(){this.insolvent--;}
-
     public String getMail() {
         return mail;
     }

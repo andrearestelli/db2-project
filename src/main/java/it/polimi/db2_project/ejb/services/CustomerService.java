@@ -28,24 +28,12 @@ public class CustomerService {
     }
 
     public Optional<Customer> findCustomerByUsername(String username) {
-        return em.createNamedQuery("Customer.findByUsername", Customer.class)
-                .setParameter("username", username)
-                .getResultStream().findFirst();
+        return Optional.ofNullable(em.find(Customer.class,username));
     }
 
-    public void addInsolvent(Customer customer) {
-        customer.addInsolvent();
-        // Merge used to change the state of customer to managed from detached
-        em.merge(customer);
+    public Customer refreshCustomer(String username) {
+        Customer customer = em.find(Customer.class,username);
+        em.refresh(customer);
+        return customer;
     }
-
-    /*
-    //TODO Valutare se rimuovere
-    public void decrementInsolvent(Customer customer) {
-        customer.decrementInsolvent();
-        // Merge used to change the state of customer to managed from detached
-        em.merge(customer);
-    }*/
-
-
 }

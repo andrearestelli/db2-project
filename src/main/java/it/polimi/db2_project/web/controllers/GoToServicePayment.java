@@ -34,21 +34,18 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
         Order.StateType stateType;
         if (external_service == 2) {
             stateType = Order.StateType.REJECTED;
-            //TODO Valutare con triggers
-            customerService.addInsolvent(((Customer) request.getSession().getAttribute("user")));
         }
         else {
             stateType = Order.StateType.VALID;
             orderService.createActivationSchedule((Customer) request.getSession().getAttribute("user"),
                     orderService.findByID(orderID));
         }
-
         // Update state of order in db
         orderService.setStateByID(orderID, stateType);
-
         // Remove unconfirmed order from the session
         request.getSession().removeAttribute("unconfirmedOrder");
-
+        // Refresh customer after after update order
+        request.getSession().setAttribute("user",customerService.refreshCustomer(((Customer) request.getSession().getAttribute("user")).getUsername()));
         // Append to the template a boolean variable, true if the payment has been accepted, false otherwise
         processTemplate(request,response, Collections.singletonMap("orderOutcome", stateType == Order.StateType.VALID));
     }
