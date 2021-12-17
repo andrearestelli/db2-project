@@ -33,6 +33,7 @@
             </td>
         </tr>
     </table>
+    <div>Here below are shown all the available service packages</div>
     <table>
         <tr>
             <th><b>ID</b></th>
@@ -44,7 +45,7 @@
         <tr th:each="servicePackage : ${servicePackages}">
             <td th:text="${servicePackage.ID}"></td>
             <td th:text="${servicePackage.name}"></td>
-            <td th:text="${servicePackage.validity_period}"></td>
+            <td th:text="${servicePackage.validity_period + ' months'}"></td>
             <td>
                 <table class="table1">
                     <tr class="tr1" th:each="service : ${servicePackage.services}">
@@ -52,7 +53,7 @@
                     </tr>
                 </table>
             </td>
-            <td th:text="${servicePackage.monthly_fee}"></td>
+            <td th:text="${servicePackage.monthly_fee + ' euros'}"></td>
         </tr>
     </table>
 </body>
