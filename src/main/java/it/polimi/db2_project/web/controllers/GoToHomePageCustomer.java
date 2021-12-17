@@ -39,9 +39,8 @@ public class GoToHomePageCustomer extends AbstractThymeleafServlet{
                 List<Order> rejectedOrders = orderService.findRejectedOrdersByUser(customer);
                 attributes.put("rejectedOrders",rejectedOrders);
             }
-
         }
-
+        else attributes.put("insolvent",0);
         List<ServicePackage> servicePackages = packageService.findAllServicePackage();
         attributes.put("servicePackages",servicePackages);
         processTemplate(request, response, attributes);
