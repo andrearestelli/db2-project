@@ -229,6 +229,56 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `UpdateTotalPurchasesPerPackage` AFTER UPDATE ON `order` FOR EACH ROW BEGIN
+	IF((old.state = 'PENDING' OR old.state = 'REJECTED')
+		AND new.state = 'VALID') THEN
+		UPDATE telcodb.total_purchases_per_package
+			SET total_purchases = total_purchases + 1
+			WHERE packageName = (SELECT sp.name FROM
+								telcodb.service_package sp JOIN telcodb.order o
+                                ON o.id_package = sp.ID
+                                WHERE o.ID = new.ID);
+	END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `UpdateTotalPurchasesPerPackageAndValidityPeriod` AFTER UPDATE ON `order` FOR EACH ROW BEGIN
+	IF((old.state = 'PENDING' OR old.state = 'REJECTED')
+		AND new.state = 'VALID') THEN
+		UPDATE telcodb.total_purchases_validity_period_per_package
+			SET total_purchases = total_purchases + 1
+			WHERE (packageName,validity_period) = (SELECT sp.name,sp.validity_period FROM
+								telcodb.service_package sp JOIN telcodb.order o
+                                ON o.id_package = sp.ID
+                                WHERE o.ID = new.ID);
+	END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `order_opt_product_link`
@@ -279,7 +329,7 @@ CREATE TABLE `package_opt_product_link` (
 
 LOCK TABLES `package_opt_product_link` WRITE;
 /*!40000 ALTER TABLE `package_opt_product_link` DISABLE KEYS */;
-INSERT INTO `package_opt_product_link` VALUES (2,1),(2,2),(6,2),(1,3),(2,4),(4,4),(6,4),(4,5);
+INSERT INTO `package_opt_product_link` VALUES (2,1),(10,1),(2,2),(6,2),(12,2),(1,3),(7,3),(2,4),(4,4),(6,4),(4,5),(10,5);
 /*!40000 ALTER TABLE `package_opt_product_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,7 +431,7 @@ CREATE TABLE `service_package` (
   `validity_period` int NOT NULL,
   `monthly_fee` decimal(2,0) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -390,9 +440,33 @@ CREATE TABLE `service_package` (
 
 LOCK TABLES `service_package` WRITE;
 /*!40000 ALTER TABLE `service_package` DISABLE KEYS */;
-INSERT INTO `service_package` VALUES (1,'service1',2,24),(2,'service2',3,20),(3,'service3',6,25),(4,'service4',3,18),(5,'service5',5,45),(6,'service6',3,41);
+INSERT INTO `service_package` VALUES (1,'service1',2,24),(2,'service2',3,20),(3,'service3',6,25),(4,'service4',3,18),(5,'service5',5,45),(6,'service6',3,41),(7,'service7',2,46),(10,'service8',3,47),(11,'service9',4,40),(12,'service8',3,90);
 /*!40000 ALTER TABLE `service_package` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `CreateService_package_Total_purchases` AFTER INSERT ON `service_package` FOR EACH ROW BEGIN
+	IF(new.name NOT IN (SELECT tp.packageName FROM telcodb.total_purchases_per_package tp))THEN
+		INSERT INTO telcodb.total_purchases_per_package 
+		VALUES(new.name,0);
+    END IF;
+    IF((new.name,new.validity_period) NOT IN (SELECT tp.packageName,tp.validity_period FROM telcodb.total_purchases_validity_period_per_package tp))THEN
+		INSERT INTO telcodb.total_purchases_validity_period_per_package
+		VALUES(new.name,new.validity_period,0);
+	END IF;	
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `service_to_package_link`
@@ -417,8 +491,55 @@ CREATE TABLE `service_to_package_link` (
 
 LOCK TABLES `service_to_package_link` WRITE;
 /*!40000 ALTER TABLE `service_to_package_link` DISABLE KEYS */;
-INSERT INTO `service_to_package_link` VALUES (1,1),(2,1),(3,1),(6,2),(8,2),(10,2),(6,3),(7,3),(8,4),(1,5),(4,5),(6,5),(8,6),(9,6),(10,6);
+INSERT INTO `service_to_package_link` VALUES (1,1),(2,1),(3,1),(6,2),(8,2),(10,2),(6,3),(7,3),(8,4),(1,5),(4,5),(6,5),(8,6),(9,6),(10,6),(2,7),(7,7),(3,10),(7,10),(6,11),(7,11),(1,12);
 /*!40000 ALTER TABLE `service_to_package_link` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `total_purchases_per_package`
+--
+
+DROP TABLE IF EXISTS `total_purchases_per_package`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `total_purchases_per_package` (
+  `packageName` varchar(45) NOT NULL,
+  `total_purchases` int DEFAULT NULL,
+  PRIMARY KEY (`packageName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `total_purchases_per_package`
+--
+
+LOCK TABLES `total_purchases_per_package` WRITE;
+/*!40000 ALTER TABLE `total_purchases_per_package` DISABLE KEYS */;
+/*!40000 ALTER TABLE `total_purchases_per_package` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `total_purchases_validity_period_per_package`
+--
+
+DROP TABLE IF EXISTS `total_purchases_validity_period_per_package`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `total_purchases_validity_period_per_package` (
+  `packageName` varchar(45) NOT NULL,
+  `validity_period` int NOT NULL,
+  `total_purchases` int DEFAULT NULL,
+  PRIMARY KEY (`packageName`,`validity_period`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `total_purchases_validity_period_per_package`
+--
+
+LOCK TABLES `total_purchases_validity_period_per_package` WRITE;
+/*!40000 ALTER TABLE `total_purchases_validity_period_per_package` DISABLE KEYS */;
+/*!40000 ALTER TABLE `total_purchases_validity_period_per_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -434,4 +555,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-17 10:03:00
+-- Dump completed on 2021-12-17 14:56:21
