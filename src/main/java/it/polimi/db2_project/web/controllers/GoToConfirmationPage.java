@@ -34,8 +34,10 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
         Integer orderID = Integer.parseInt(request.getParameter("orderID"));
         Map<String,Object> attributes = new HashMap<>();
-        boolean logged = request.getSession().getAttribute("user") != null;
-        attributes.put("logged",logged);
+        Customer user = (Customer) request.getSession().getAttribute("user");
+        if(user != null){
+            attributes.put("username", user.getUsername());
+        }
         attributes.put("servicePackage",unconfirmedOrder.getServicePackage());
         attributes.put("optionalProducts",unconfirmedOrder.getOptionalProductList());
         attributes.put("subscriptionDate",unconfirmedOrder.getSubscriptionDate());

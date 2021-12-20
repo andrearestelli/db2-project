@@ -6,6 +6,10 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
+    <a th:if="${username!=null}" class="username"><p><b><span th:text="${username}"></span></b></p>
+    </a>
+    <a th:if="${username==null}" class="username"><p><b>Guest</b></p>
+    </a>
     <p th:if="${orderOutcome}">Your payment has been <b>accepted</b>!</p>
     <p th:if="${!orderOutcome}">Your payment has been <b>rejected</b>!</p>
 

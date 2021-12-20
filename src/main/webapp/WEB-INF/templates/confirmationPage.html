@@ -6,7 +6,12 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
+    <a th:if="${username!=null}" class="username"><p><b><span th:text="${username}"></span></b></p>
+    </a>
+    <a th:if="${username==null}" class="username"><p><b>Guest</b></p>
+    </a>
     <h1>Confirm order</h1>
+
     <p th:if="${orderID!=null}">Resuming your rejected order number <span th:text="${orderID}"></span>!</p>
     <table>
         <tr>
@@ -29,11 +34,11 @@
         <tr><td><b>Ending date</b></td><td th:text="${endingDate}"></td></tr>
         <tr><td><b>Total Price</b></td><td th:text="${totalPrice}"></td></tr>
     </table>
-    <form method="POST" action="GoToConfirmationPage" th:if="${logged}">
+    <form method="POST" action="GoToConfirmationPage" th:if="${username!=null}">
         <input type="hidden" name="orderID" th:if="${orderID!=null}" th:value="${orderID}">
         <input id="buyOrderButton" class="button1" type="submit" value="Buy Order"/>
     </form>
-    <a href="CheckLoginCustomer" th:if="${!logged}" class="button1">Login</a>
-    <a href="GoToRegistrationCustomer" th:if="${!logged}" class="button1">Register</a>
+    <a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
+    <a href="GoToRegistrationCustomer" th:if="${username==null}" class="button1">Register</a>
 </body>
 </html>

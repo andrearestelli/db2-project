@@ -7,6 +7,10 @@
     <script th:src = "@{/scripts/buyServicesScript.js}" charset="utf-8" defer></script>
 </head>
 <body>
+<a th:if="${username!=null}" class="username"><p><b><span th:text="${username}"></span></b></p>
+</a>
+<a th:if="${username==null}" class="username"><p><b>Guest</b></p>
+</a>
 <h1>Buy Services page</h1>
 <form>
   <table>

@@ -1,6 +1,7 @@
 package it.polimi.db2_project.web.controllers;
 
 import com.google.gson.Gson;
+import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.OptionalProduct;
 import it.polimi.db2_project.ejb.beans.ServicePackage;
 import it.polimi.db2_project.ejb.services.OptionalProductService;
@@ -35,6 +36,10 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         Map<String,Object> attributes = new HashMap<>();
         List<ServicePackage> servicePackages = packageService.findAllServicePackage();
         attributes.put("servicePackages",servicePackages);
+        Customer user = (Customer) request.getSession().getAttribute("user");
+        if(user != null){
+            attributes.put("username", user.getUsername());
+        }
         processTemplate(request,response,attributes);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{

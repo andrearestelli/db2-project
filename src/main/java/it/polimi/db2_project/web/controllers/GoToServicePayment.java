@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @WebServlet("/GoToServicePayment")
@@ -47,7 +49,14 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
         // Refresh customer after after update order
         request.getSession().setAttribute("user",customerService.refreshCustomer(((Customer) request.getSession().getAttribute("user")).getUsername()));
         // Append to the template a boolean variable, true if the payment has been accepted, false otherwise
-        processTemplate(request,response, Collections.singletonMap("orderOutcome", stateType == Order.StateType.VALID));
+        Map<String,Object> attributes = new HashMap<>();
+        attributes.put("orderOutcome", stateType == Order.StateType.VALID);
+        // Append to the template the username of the customer
+        Customer user = (Customer) request.getSession().getAttribute("user");
+        if(user != null){
+            attributes.put("username", user.getUsername());
+        }
+        processTemplate(request,response, attributes);
     }
 
     @Override
