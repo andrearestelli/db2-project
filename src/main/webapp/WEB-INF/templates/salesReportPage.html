@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://xmlns.jcp.org/jsf/html">
 <head>
   <title>Sales Report Page</title>
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h1>Sales Report</h1>
+<p> Insolvent users:
+  <table>
+    <tr class="insolventCustomersTableRow">
+      <th>Username</th>
+      <th>Email</th>
+    </tr>
+    <tr th:each="customer : ${insolventCustomers}">
+      <td th:text="${customer.username}"></td>
+      <td th:text="${customer.mail}"></td>
+    </tr>
+  </table>
+</p>
+<p> Suspended orders:
+  <table>
+    <tr class="insolventCustomersTableRow">
+      <th>ID</th>
+      <th>Date & Hour</th>
+      <th>Total Amount</th>
+      <th>Subscription Date</th>
+      <th>User Purchaser</th>
+      <th>Service Package</th>
+    </tr>
+    <tr th:each="order : ${rejectedOrders}">
+      <td th:text="${order.ID}"></td>
+      <td th:text="${order.date_hour}"></td>
+      <td th:text="${order.total_value + ' euros'}"></td>
+      <td th:text="${order.sub_date}"></td>
+      <td th:text="${order.userOrderer.username}"></td>
+      <td th:text="${order.id_package.name}"></td>
+    </tr>
+  </table>
+</p>
+
 
 </body>
 </html>

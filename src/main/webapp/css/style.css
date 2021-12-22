@@ -148,3 +148,8 @@ table th {
 .step.finish {
     background-color: #04AA6D;
 }
+
+.insolventCustomersTableRow th {
+    background-color: darkred;
+    color: white;
+}

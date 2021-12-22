@@ -1,7 +1,6 @@
 package it.polimi.db2_project.ejb.services;
 
-import it.polimi.db2_project.ejb.beans.Employee;
-import it.polimi.db2_project.ejb.beans.Service;
+import it.polimi.db2_project.ejb.beans.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -24,6 +23,18 @@ public class EmployeeService {
 
     public List<Service> findAllServices() {
         return em.createNamedQuery("Service.findAllServices",Service.class).getResultList();
+    }
+
+    public List<Alert> findAllAlerts(){
+        return em.createNamedQuery("Alert.findAllAlerts", Alert.class).getResultList();
+    }
+
+    public List<Order> findAllRejectedOrders(){
+        return em.createNamedQuery("Order.findAllRejectedOrders", Order.class).getResultList();
+    }
+
+    public List<Customer> findInsolventCustomers(){
+        return em.createNamedQuery("Customer.findInsolventCustomers", Customer.class).getResultList();
     }
 
     public List<Service> findServiceListByID(List<Integer> serviceIDList){

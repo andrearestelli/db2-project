@@ -9,10 +9,15 @@ import java.util.List;
 @Table(name = "order", schema = "telcodb")
 @NamedQueries(
         {
-                @NamedQuery(name = "Order.findRejectedOrdersByUser"
-                        ,query = "Select o " +
+                @NamedQuery(name = "Order.findRejectedOrdersByUser",
+                        query = "SELECT o " +
                         "FROM Order o " +
                         "WHERE o.userOrderer = :username AND o.state = :statetype ")
+                ,
+                @NamedQuery(name = "Order.findAllRejectedOrders",
+                        query = "SELECT o " +
+                        "FROM Order o " +
+                        "WHERE o.state = 'REJECTED'")
         }
 )
 
