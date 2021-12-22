@@ -38,6 +38,24 @@
     </tr>
   </table>
 </p>
+<p> Alerts:
+<table>
+  <tr class="insolventCustomersTableRow">
+    <th>ID</th>
+    <th>User</th>
+    <th>Date & Hour</th>
+    <th>Total Amount</th>
+    <th>User email</th>
+  </tr>
+  <tr th:each="alert : ${alerts}">
+    <td th:text="${alert.ID}"></td>
+    <td th:text="${alert.user_id.username}"></td>
+    <td th:text="${alert.datetime}"></td>
+    <td th:text="${alert.amount + ' euros'}"></td>
+    <td th:text="${alert.mail}"></td>
+  </tr>
+</table>
+</p>
 
 
 </body>
