@@ -57,6 +57,76 @@
 </table>
 </p>
 
+<p> Average Number of Optional Product:
+<table>
+  <tr class="insolventCustomersTableRow">
+    <th>Package Name</th>
+    <th>Average Number of Optional Products</th>
+  </tr>
+  <tr th:each="averageNumber : ${averageNumberOfOptP}">
+    <td th:text="${averageNumber.packageName}"></td>
+    <td th:text="${averageNumber.average_of_opt_products}"></td>
+  </tr>
+</table>
+</p>
 
+<p> Total Purchases Per Package:
+<table>
+  <tr class="insolventCustomersTableRow">
+    <th>Package Name</th>
+    <th>Average Number of Optional Products</th>
+  </tr>
+  <tr th:each="totalPurchases : ${totalPurchasesPerPackage}">
+    <td th:text="${totalPurchases.packageName}"></td>
+    <td th:text="${totalPurchases.total_purchases}"></td>
+  </tr>
+</table>
+</p>
+
+<p> Total Purchases per validity period per Package:
+<table>
+  <tr class="insolventCustomersTableRow">
+    <th>Package Name</th>
+    <th>Validity Period</th>
+    <th>Average Number of Optional Products</th>
+  </tr>
+  <tr th:each="totalPurchasesVP : ${TotalPurchasesValidityPeriod}">
+    <td th:text="${totalPurchasesVP.packageName}"></td>
+    <td th:text="${totalPurchasesVP.validity_period}"></td>
+    <td th:text="${totalPurchasesVP.total_purchases}"></td>
+  </tr>
+</table>
+</p>
+
+<p> Total Value of Sales:
+<table>
+  <tr class="insolventCustomersTableRow">
+    <th>Package Name</th>
+    <th>Total Value with Optional Products</th>
+    <th>Total Value without Optional Products</th>
+  </tr>
+  <tr th:each="totalValue : ${totalValueOfSales}">
+    <td th:text="${totalValue.packageName}"></td>
+    <td th:text="${totalValue.total_value_with_optp}"></td>
+    <td th:text="${totalValue.total_value_without_optp}"></td>
+  </tr>
+</table>
+</p>
+
+<p> Best Seller Optional Product:
+<table>
+  <tr class="insolventCustomersTableRow">
+    <th>Optional Product</th>
+    <th>Total Value</th>
+  </tr>
+  <tr th:if="${bestSellerOptionalProduct}!=null">
+    <td th:text="${bestSellerOptionalProduct.optionalProduct}"></td>
+    <td th:text="${bestSellerOptionalProduct.total_value}"></td>
+  </tr>
+  <tr th:if="${bestSellerOptionalProduct}==null">
+    No optional products available
+  </tr>
+</table>
+</p>
 </body>
 </html>

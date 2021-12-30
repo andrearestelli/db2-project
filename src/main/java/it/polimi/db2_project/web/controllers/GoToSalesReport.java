@@ -4,6 +4,7 @@ import it.polimi.db2_project.ejb.beans.Alert;
 import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Order;
 import it.polimi.db2_project.ejb.services.EmployeeService;
+import it.polimi.db2_project.ejb.services.SalesReportService;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.ejb.EJB;
@@ -20,6 +21,8 @@ import java.util.Map;
 public class GoToSalesReport extends AbstractThymeleafServlet{
     @EJB(name = "it.polimi.db2_project.ejb.services.EmployeeService")
     private EmployeeService employeeService;
+    @EJB(name = "it.polimi.db2_project.ejb.services.SalesReportService")
+    private SalesReportService salesReportService;
 
     public GoToSalesReport() {
         super("salesReportPage", "WEB-INF/templates/", ".html", TemplateMode.HTML);
@@ -31,8 +34,11 @@ public class GoToSalesReport extends AbstractThymeleafServlet{
         attributes.put("insolventCustomers", employeeService.findInsolventCustomers());
         attributes.put("rejectedOrders", employeeService.findAllRejectedOrders());
         attributes.put("alerts", employeeService.findAllAlerts());
-
-
+        attributes.put("averageNumberOfOptP",salesReportService.retrieveAllAverage());
+        attributes.put("totalPurchasesPerPackage",salesReportService.retrieveAllTotalPurchasesPerPackage());
+        attributes.put("TotalPurchasesValidityPeriod",salesReportService.retrieveAllTotalPurchasesValidityPeriod());
+        attributes.put("totalValueOfSales",salesReportService.retrieveAllTotalValueOfSales());
+        attributes.put("bestSellerOptionalProduct",salesReportService.retrieveBestSellerOptProduct());
         processTemplate(request, response, attributes);
     }
 

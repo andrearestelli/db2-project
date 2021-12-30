@@ -40,4 +40,5 @@ public class EmployeeService {
     public List<Service> findServiceListByID(List<Integer> serviceIDList){
         return serviceIDList.stream().map(x -> em.find(Service.class, x)).collect(Collectors.toList());
     }
+
 }
