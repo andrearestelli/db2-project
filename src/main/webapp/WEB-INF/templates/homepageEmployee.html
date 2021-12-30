@@ -7,7 +7,10 @@
     <script th:src = "@{/scripts/createServicePackageScript.js}" charset="utf-8" defer></script>
 </head>
 <body>
-<a class="username"><p><b>Welcome back <span th:text="${username}"></span>!</b></p></a>
+<div class="top-right-corner">
+    <a href="Logout" class="logout">Logout</a>
+    <p class="username">Welcome back <b><span th:text="${username}"></span>!</b></p>
+</div>
 <a href="GoToSalesReport" class="button1" style="margin-right: 0">Sales Report</a>
 <p>Here you can create a Service Package
 <form id="regForm">

@@ -31,9 +31,9 @@ public class GoToSalesReport extends AbstractThymeleafServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("insolventCustomers", employeeService.findInsolventCustomers());
-        attributes.put("rejectedOrders", employeeService.findAllRejectedOrders());
-        attributes.put("alerts", employeeService.findAllAlerts());
+        attributes.put("insolventCustomers", salesReportService.findInsolventCustomers());
+        attributes.put("rejectedOrders", salesReportService.findAllRejectedOrders());
+        attributes.put("alerts", salesReportService.findAllAlerts());
         attributes.put("averageNumberOfOptP",salesReportService.retrieveAllAverage());
         attributes.put("totalPurchasesPerPackage",salesReportService.retrieveAllTotalPurchasesPerPackage());
         attributes.put("TotalPurchasesValidityPeriod",salesReportService.retrieveAllTotalPurchasesValidityPeriod());

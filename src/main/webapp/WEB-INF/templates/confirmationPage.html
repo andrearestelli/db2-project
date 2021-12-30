@@ -6,39 +6,42 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <a th:if="${username!=null}" class="username"><p><b><span th:text="${username}"></span></b></p>
-    </a>
-    <a th:if="${username==null}" class="username"><p><b>Guest</b></p>
-    </a>
-    <h1>Confirm order</h1>
+<div th:if="${username!=null}" class="top-right-corner">
+    <a href="Logout" class="logout">Logout</a>
+    <p class="username"><b><span th:text="${username}"></span></b></p>
+</div>
+<div th:if="${username==null}" class="top-right-corner">
+    <p class="username"><b>Guest</b></p>
+</div>
+<h1>Confirm order</h1>
 
-    <p th:if="${orderID!=null}">Resuming your rejected order number <span th:text="${orderID}"></span>!</p>
-    <table>
-        <tr>
-            <th style="alignment: center"><b>Order Report</b></th>
-        </tr>
-        <tr><td><b>Service name</b></td><td th:text="${servicePackage.name}"></td></tr>
-        <tr><td><b>Validity Period</b></td><td th:text="${servicePackage.validity_period}"></td></tr>
-        <tr><td><b>Monthly fee</b></td><td th:text="${servicePackage.monthly_fee}"></td></tr>
-        <tr><td><b>Optional products</b></td>
-            <td>
-                <table class="table1">
-                    <tr class="tr1" th:each="OptionalProduct : ${optionalProducts}">
-                        <td class="td1" th:text="${OptionalProduct.name}"></td>
-                        <td class="td1" th:text="${OptionalProduct.monthly_fee}"></td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr><td><b>Subscription date</b></td><td th:text="${subscriptionDate}"></td></tr>
-        <tr><td><b>Ending date</b></td><td th:text="${endingDate}"></td></tr>
-        <tr><td><b>Total Price</b></td><td th:text="${totalPrice}"></td></tr>
-    </table>
-    <form method="POST" action="GoToConfirmationPage" th:if="${username!=null}">
-        <input type="hidden" name="orderID" th:if="${orderID!=null}" th:value="${orderID}">
-        <input id="buyOrderButton" class="button1" type="submit" value="Buy Order"/>
-    </form>
-    <a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
-    <a href="GoToRegistrationCustomer" th:if="${username==null}" class="button1">Register</a>
+<p th:if="${orderID!=null}">Resuming your rejected order number <span th:text="${orderID}"></span>!</p>
+<table>
+    <tr>
+        <th style="alignment: center"><b>Order Report</b></th>
+    </tr>
+    <tr><td><b>Service name</b></td><td th:text="${servicePackage.name}"></td></tr>
+    <tr><td><b>Validity Period</b></td><td th:text="${servicePackage.validity_period}"></td></tr>
+    <tr><td><b>Monthly fee</b></td><td th:text="${servicePackage.monthly_fee}"></td></tr>
+    <tr><td><b>Optional products</b></td>
+        <td>
+            <table class="table1">
+                <tr class="tr1" th:each="OptionalProduct : ${optionalProducts}">
+                    <td class="td1" th:text="${OptionalProduct.name}"></td>
+                    <td class="td1" th:text="${OptionalProduct.monthly_fee}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr><td><b>Subscription date</b></td><td th:text="${subscriptionDate}"></td></tr>
+    <tr><td><b>Ending date</b></td><td th:text="${endingDate}"></td></tr>
+    <tr><td><b>Total Price</b></td><td th:text="${totalPrice}"></td></tr>
+</table>
+<form method="POST" action="GoToConfirmationPage" th:if="${username!=null}">
+    <input type="hidden" name="orderID" th:if="${orderID!=null}" th:value="${orderID}">
+    <input id="buyOrderButton" class="button1" type="submit" value="Buy Order"/>
+</form>
+<a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
+<a href="GoToRegistrationCustomer" th:if="${username==null}" class="button1">Register</a>
 </body>
 </html>

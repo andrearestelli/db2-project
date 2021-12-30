@@ -5,6 +5,10 @@
   <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
+<div class="top-right-corner">
+  <a href="Logout" class="logout">Logout</a>
+  <p class="username"><b><span th:text="${username}"></span></b></p>
+</div>
 <h1>Sales Report</h1>
 <p> Insolvent users:
   <table>

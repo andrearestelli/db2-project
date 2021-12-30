@@ -2,7 +2,9 @@ package it.polimi.db2_project.ejb.services;
 
 
 import it.polimi.db2_project.ejb.beans.Alert;
-import it.polimi.db2_project.ejb.beans.salesReportBeans.*;
+import it.polimi.db2_project.ejb.beans.Customer;
+import it.polimi.db2_project.ejb.beans.Order;
+import it.polimi.db2_project.ejb.beans.salesreportbeans.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,6 +15,18 @@ import java.util.List;
 public class SalesReportService {
     @PersistenceContext(name = "telcoEJB")
     private EntityManager em;
+
+    public List<Alert> findAllAlerts(){
+        return em.createNamedQuery("Alert.findAllAlerts", Alert.class).getResultList();
+    }
+
+    public List<Order> findAllRejectedOrders(){
+        return em.createNamedQuery("Order.findAllRejectedOrders", Order.class).getResultList();
+    }
+
+    public List<Customer> findInsolventCustomers(){
+        return em.createNamedQuery("Customer.findInsolventCustomers", Customer.class).getResultList();
+    }
 
     public List<AverageNumberOfOptionalProducts> retrieveAllAverage(){
         return em.createNamedQuery("AverageNumberOfOptionalProducts.retrieveAll",

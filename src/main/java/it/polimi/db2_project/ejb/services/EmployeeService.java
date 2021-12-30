@@ -25,18 +25,6 @@ public class EmployeeService {
         return em.createNamedQuery("Service.findAllServices",Service.class).getResultList();
     }
 
-    public List<Alert> findAllAlerts(){
-        return em.createNamedQuery("Alert.findAllAlerts", Alert.class).getResultList();
-    }
-
-    public List<Order> findAllRejectedOrders(){
-        return em.createNamedQuery("Order.findAllRejectedOrders", Order.class).getResultList();
-    }
-
-    public List<Customer> findInsolventCustomers(){
-        return em.createNamedQuery("Customer.findInsolventCustomers", Customer.class).getResultList();
-    }
-
     public List<Service> findServiceListByID(List<Integer> serviceIDList){
         return serviceIDList.stream().map(x -> em.find(Service.class, x)).collect(Collectors.toList());
     }

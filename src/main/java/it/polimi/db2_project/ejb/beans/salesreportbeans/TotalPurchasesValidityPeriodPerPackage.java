@@ -1,4 +1,4 @@
-package it.polimi.db2_project.ejb.beans.salesReportBeans;
+package it.polimi.db2_project.ejb.beans.salesreportbeans;
 
 
 import javax.persistence.*;

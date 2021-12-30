@@ -6,55 +6,58 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <a th:if="${username!=null}" class="username"><p><b>Welcome back <span th:text="${username}"></span>!</b></p>
-    </a>
-    <a th:if="${username==null}" class="username"><p><b>Welcome to Telco Company guest!</b></p>
-    </a>
-    <a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
-    <a href="GoToBuyServices" class="button1">Buy Services</a>
-    <table th:if="${insolvent!=0}">
-        <tr>
-            <th><b>ID Order</b></th>
-            <th><b>Service Package</b></th>
-            <th><b>Date hour</b></th>
-            <th><b>Total value</b></th>
-            <th><b></b></th>
-        </tr>
-        <tr th:each="order : ${rejectedOrders}">
-            <td th:text="${order.ID}"></td>
-            <td th:text="${order.id_package.name}"></td>
-            <td th:text="${order.date_hour}"></td>
-            <td th:text="${order.total_value}"></td>
-            <td>
-                <form action="GoToResumeOrder" method="get">
-                    <input type="hidden" name="IDorder" th:value="${order.ID}">
-                    <input class="button1" type="submit" value="Resume">
-                </form>
-            </td>
-        </tr>
-    </table>
-    <div>Here below are shown all the available service packages</div>
-    <table>
-        <tr>
-            <th><b>ID</b></th>
-            <th><b>Name</b></th>
-            <th><b>Validity period</b></th>
-            <th><b>Services</b></th>
-            <th><b>Monthly fee</b></th>
-        </tr>
-        <tr th:each="servicePackage : ${servicePackages}">
-            <td th:text="${servicePackage.ID}"></td>
-            <td th:text="${servicePackage.name}"></td>
-            <td th:text="${servicePackage.validity_period + ' months'}"></td>
-            <td>
-                <table class="table1">
-                    <tr class="tr1" th:each="service : ${servicePackage.services}">
-                        <td class="td1" th:text="${service.type}"></td>
-                    </tr>
-                </table>
-            </td>
-            <td th:text="${servicePackage.monthly_fee + ' euros'}"></td>
-        </tr>
-    </table>
+<div th:if="${username!=null}" class="top-right-corner">
+    <a href="Logout" class="logout">Logout</a>
+    <p class="username">Welcome back <b><span th:text="${username}"></span></b>!</p>
+</div>
+<div th:if="${username==null}" class="top-right-corner">
+    <p class="username">Welcome to Telco Company <b>guest</b>!</p>
+</div>
+<a href="CheckLoginCustomer" th:if="${username==null}" class="button1">Login</a>
+<a href="GoToBuyServices" class="button1">Buy Services</a>
+<table th:if="${insolvent!=0}">
+    <tr>
+        <th><b>ID Order</b></th>
+        <th><b>Service Package</b></th>
+        <th><b>Date hour</b></th>
+        <th><b>Total value</b></th>
+        <th><b></b></th>
+    </tr>
+    <tr th:each="order : ${rejectedOrders}">
+        <td th:text="${order.ID}"></td>
+        <td th:text="${order.id_package.name}"></td>
+        <td th:text="${order.date_hour}"></td>
+        <td th:text="${order.total_value}"></td>
+        <td>
+            <form action="GoToResumeOrder" method="get">
+                <input type="hidden" name="IDorder" th:value="${order.ID}">
+                <input class="button1" type="submit" value="Resume">
+            </form>
+        </td>
+    </tr>
+</table>
+<div>Here below are shown all the available service packages</div>
+<table>
+    <tr>
+        <th><b>ID</b></th>
+        <th><b>Name</b></th>
+        <th><b>Validity period</b></th>
+        <th><b>Services</b></th>
+        <th><b>Monthly fee</b></th>
+    </tr>
+    <tr th:each="servicePackage : ${servicePackages}">
+        <td th:text="${servicePackage.ID}"></td>
+        <td th:text="${servicePackage.name}"></td>
+        <td th:text="${servicePackage.validity_period + ' months'}"></td>
+        <td>
+            <table class="table1">
+                <tr class="tr1" th:each="service : ${servicePackage.services}">
+                    <td class="td1" th:text="${service.type}"></td>
+                </tr>
+            </table>
+        </td>
+        <td th:text="${servicePackage.monthly_fee + ' euros'}"></td>
+    </tr>
+</table>
 </body>
 </html>
