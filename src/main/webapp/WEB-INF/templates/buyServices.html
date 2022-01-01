@@ -25,7 +25,7 @@
         <tr th:each="servicePackage : ${servicePackages}">
             <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}"
                        th:value="${servicePackage.ID}" onclick="enableCheckboxes(this)" required/></td>
-            <td><a type="text" th:text="${servicePackage.validity_period}"></a></td>
+            <td><a type="text" th:text="${servicePackage.validity_period + ' months'}"></a></td>
             <td>
                 <table class="table1">
                     <tr class="tr1" th:each="optionalProduct : ${servicePackage.optionalProducts}">
@@ -33,7 +33,7 @@
                             <input  type="checkbox" disabled
                                     name="optionalProductID" th:value="${optionalProduct.ID}" th:text="${optionalProduct.name}" >
                         </td>
-                        <td class="td1" th:text="${optionalProduct.monthly_fee}">
+                        <td class="td1" th:text="${optionalProduct.monthly_fee + ' euros'}">
                         </td>
                     </tr>
                 </table>
