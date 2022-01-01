@@ -33,7 +33,9 @@
                             <input  type="checkbox" disabled
                                     name="optionalProductID" th:value="${optionalProduct.ID}" th:text="${optionalProduct.name}" >
                         </td>
-                        <td class="td1" th:text="${optionalProduct.monthly_fee + ' euros'}">
+                        <td class="td1">
+                            <span th:text="${optionalProduct.monthly_fee}"></span>
+                            <span> &euro;</span>
                         </td>
                     </tr>
                 </table>

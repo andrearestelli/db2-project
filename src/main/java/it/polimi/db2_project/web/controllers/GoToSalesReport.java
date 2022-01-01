@@ -1,8 +1,5 @@
 package it.polimi.db2_project.web.controllers;
 
-import it.polimi.db2_project.ejb.beans.Alert;
-import it.polimi.db2_project.ejb.beans.Customer;
-import it.polimi.db2_project.ejb.beans.Order;
 import it.polimi.db2_project.ejb.services.EmployeeService;
 import it.polimi.db2_project.ejb.services.SalesReportService;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/GoToSalesReport")

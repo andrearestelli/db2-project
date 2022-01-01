@@ -20,6 +20,9 @@
       <td th:text="${customer.username}"></td>
       <td th:text="${customer.mail}"></td>
     </tr>
+    <tr th:if="${insolventCustomers.size() == 0}">
+      <td colspan="2">No insolvent customers yet.</td>
+    </tr>
   </table>
 </p>
 <p> Suspended orders:
@@ -35,10 +38,16 @@
     <tr th:each="order : ${rejectedOrders}">
       <td th:text="${order.ID}"></td>
       <td th:text="${order.date_hour}"></td>
-      <td th:text="${order.total_value + ' euros'}"></td>
+      <td>
+        <span th:text="${order.total_value}"></span>
+        <span> &euro;</span>
+      </td>
       <td th:text="${order.sub_date}"></td>
       <td th:text="${order.userOrderer.username}"></td>
       <td th:text="${order.id_package.name}"></td>
+    </tr>
+    <tr th:if="${rejectedOrders.size() == 0}">
+      <td colspan="6">No rejected orders yet.</td>
     </tr>
   </table>
 </p>
@@ -55,8 +64,14 @@
     <td th:text="${alert.ID}"></td>
     <td th:text="${alert.user_id.username}"></td>
     <td th:text="${alert.datetime}"></td>
-    <td th:text="${alert.amount + ' euros'}"></td>
+    <td>
+      <span th:text="${alert.amount}"></span>
+      <span> &euro;</span>
+    </td>
     <td th:text="${alert.mail}"></td>
+  </tr>
+  <tr th:if="${alerts.size() == 0}">
+    <td colspan="5">No alerts yet.</td>
   </tr>
 </table>
 </p>
@@ -71,6 +86,9 @@
     <td th:text="${averageNumber.packageName}"></td>
     <td th:text="${averageNumber.average_of_opt_products}"></td>
   </tr>
+  <tr th:if="${averageNumberOfOptP.size() == 0}">
+    <td colspan="2">No packages created yet.</td>
+  </tr>
 </table>
 </p>
 
@@ -78,11 +96,14 @@
 <table>
   <tr class="insolventCustomersTableRow">
     <th>Package Name</th>
-    <th>Average Number of Optional Products</th>
+    <th>Total Purchases</th>
   </tr>
   <tr th:each="totalPurchases : ${totalPurchasesPerPackage}">
     <td th:text="${totalPurchases.packageName}"></td>
     <td th:text="${totalPurchases.total_purchases}"></td>
+  </tr>
+  <tr th:if="${totalPurchasesPerPackage.size() == 0}">
+    <td colspan="2">No packages created yet.</td>
   </tr>
 </table>
 </p>
@@ -92,12 +113,15 @@
   <tr class="insolventCustomersTableRow">
     <th>Package Name</th>
     <th>Validity Period</th>
-    <th>Average Number of Optional Products</th>
+    <th>Total Purchases</th>
   </tr>
   <tr th:each="totalPurchasesVP : ${TotalPurchasesValidityPeriod}">
     <td th:text="${totalPurchasesVP.packageName}"></td>
-    <td th:text="${totalPurchasesVP.validity_period}"></td>
+    <td th:text="${totalPurchasesVP.validity_period + ' months'}"></td>
     <td th:text="${totalPurchasesVP.total_purchases}"></td>
+  </tr>
+  <tr th:if="${TotalPurchasesValidityPeriod.size() == 0}">
+    <td colspan="3">No packages created yet.</td>
   </tr>
 </table>
 </p>
@@ -111,8 +135,17 @@
   </tr>
   <tr th:each="totalValue : ${totalValueOfSales}">
     <td th:text="${totalValue.packageName}"></td>
-    <td th:text="${totalValue.total_value_with_optp}"></td>
-    <td th:text="${totalValue.total_value_without_optp}"></td>
+    <td>
+      <span th:text="${totalValue.total_value_with_optp}"></span>
+      <span> &euro;</span>
+    </td>
+    <td>
+      <span th:text="${totalValue.total_value_without_optp}"></span>
+      <span> &euro;</span>
+    </td>
+  </tr>
+  <tr th:if="${totalValueOfSales.size() == 0}">
+    <td colspan="3">No packages created yet.</td>
   </tr>
 </table>
 </p>
@@ -125,10 +158,13 @@
   </tr>
   <tr th:if="${bestSellerOptionalProduct}!=null">
     <td th:text="${bestSellerOptionalProduct.optionalProduct}"></td>
-    <td th:text="${bestSellerOptionalProduct.total_value}"></td>
+    <td>
+      <span th:text="${bestSellerOptionalProduct.total_value}"></span>
+      <span> &euro;</span>
+    </td>
   </tr>
   <tr th:if="${bestSellerOptionalProduct}==null">
-    No optional products available
+    <td colspan="2">No optional products available</td>
   </tr>
 </table>
 </p>

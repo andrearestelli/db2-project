@@ -56,7 +56,10 @@
                 </tr>
             </table>
         </td>
-        <td th:text="${servicePackage.monthly_fee + ' euros'}"></td>
+        <td>
+            <span th:text="${servicePackage.monthly_fee}"></span>
+            <span> &euro;</span>
+        </td>
     </tr>
 </table>
 </body>

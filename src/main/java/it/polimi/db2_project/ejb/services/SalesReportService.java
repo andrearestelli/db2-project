@@ -17,40 +17,47 @@ public class SalesReportService {
     private EntityManager em;
 
     public List<Alert> findAllAlerts(){
-        return em.createNamedQuery("Alert.findAllAlerts", Alert.class).getResultList();
+        return em.createNamedQuery("Alert.findAllAlerts", Alert.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public List<Order> findAllRejectedOrders(){
-        return em.createNamedQuery("Order.findAllRejectedOrders", Order.class).getResultList();
+        return em.createNamedQuery("Order.findAllRejectedOrders", Order.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public List<Customer> findInsolventCustomers(){
-        return em.createNamedQuery("Customer.findInsolventCustomers", Customer.class).getResultList();
+        return em.createNamedQuery("Customer.findInsolventCustomers", Customer.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public List<AverageNumberOfOptionalProducts> retrieveAllAverage(){
         return em.createNamedQuery("AverageNumberOfOptionalProducts.retrieveAll",
-                AverageNumberOfOptionalProducts.class).getResultList();
+                AverageNumberOfOptionalProducts.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public List<TotalPurchasesPerPackage> retrieveAllTotalPurchasesPerPackage(){
         return em.createNamedQuery("TotalPurchasesPerPackage.retrieveAll",
-                TotalPurchasesPerPackage.class).getResultList();
+                TotalPurchasesPerPackage.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public List<TotalPurchasesValidityPeriodPerPackage> retrieveAllTotalPurchasesValidityPeriod(){
         return em.createNamedQuery("TotalPurchasesValidityPeriodPerPackage.retrieveAll",
-                TotalPurchasesValidityPeriodPerPackage.class).getResultList();
+                TotalPurchasesValidityPeriodPerPackage.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public List<TotalValueOfSales> retrieveAllTotalValueOfSales(){
-        return em.createNamedQuery("TotalValueOfSales.retrieveAll",
-                TotalValueOfSales.class).getResultList();
+        return em.createNamedQuery("TotalValueOfSales.retrieveAll", TotalValueOfSales.class).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
     }
 
     public BestSellerOptionalProduct retrieveBestSellerOptProduct(){
         List<BestSellerOptionalProduct> bestSellerOptionalProducts = em.createNamedQuery("BestSellerOptionalProduct.retrieveBestSeller",
-                BestSellerOptionalProduct.class).setMaxResults(1).getResultList();
+                BestSellerOptionalProduct.class).setMaxResults(1).
+                setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
         if(bestSellerOptionalProducts.isEmpty())
             return null;
         else return bestSellerOptionalProducts.get(0);
