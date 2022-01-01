@@ -27,7 +27,7 @@ public class GoToHomePageEmployee extends AbstractThymeleafServlet{
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("username",((Employee)request.getSession().getAttribute("user")).getUsername());
+        attributes.put("username",((Employee)request.getSession().getAttribute("employee")).getUsername());
         attributes.put("services",employeeService.findAllServices());
         attributes.put("optionalProducts",optionalProductService.findAllOptionalProduct());
         processTemplate(request, response, attributes);

@@ -30,7 +30,7 @@
         <td th:text="${order.total_value}"></td>
         <td>
             <form action="GoToResumeOrder" method="get">
-                <input type="hidden" name="IDorder" th:value="${order.ID}">
+                <input type="hidden" name="orderID" th:value="${order.ID}">
                 <input class="button1" type="submit" value="Resume">
             </form>
         </td>

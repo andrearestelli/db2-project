@@ -4,6 +4,27 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <filter>
+        <filter-name>CustomerChecker</filter-name>
+        <filter-class>it.polimi.db2_project.web.filters.CustomerChecker</filter-class>
+    </filter>
+    <filter>
+        <filter-name>EmployeeChecker</filter-name>
+        <filter-class>it.polimi.db2_project.web.filters.EmployeeChecker</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CustomerChecker</filter-name>
+        <url-pattern>/GoToResumeOrder</url-pattern>
+        <url-pattern>/GoToServicePayment</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EmployeeChecker</filter-name>
+        <url-pattern>/CreateOptionalProduct</url-pattern>
+        <url-pattern>/CreateServicePackage</url-pattern>
+        <url-pattern>/GoToHomePageEmployee</url-pattern>
+        <url-pattern>/GoToSalesReport</url-pattern>
+    </filter-mapping>
+
    <welcome-file-list>
        <welcome-file>index.html</welcome-file>
    </welcome-file-list>

@@ -3,10 +3,8 @@ package it.polimi.db2_project.web.controllers;
 import it.polimi.db2_project.ejb.beans.Order;
 import it.polimi.db2_project.ejb.services.OrderService;
 import it.polimi.db2_project.web.utils.UnconfirmedOrder;
-import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.ejb.EJB;
-import javax.persistence.Id;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,13 +23,24 @@ public class GoToResumeOrder extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer IDorder =Integer.parseInt(request.getParameter("IDorder"));
-        Order order = orderService.findByID(IDorder);
+        int orderID;
+
+        // If the argument of Integer.parseInt is null or is a string of length zero, a
+        // NumberFormatException is thrown
+        // @see https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html#parseInt(java.lang.String)
+        try {
+            orderID = Integer.parseInt(request.getParameter("orderID"));
+        } catch (NumberFormatException | NullPointerException e ) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid or missing parameters");
+            return;
+        }
+
+        Order order = orderService.findByID(orderID);
         UnconfirmedOrder unconfirmedOrder = new UnconfirmedOrder(order.getId_package(),
                 order.getOptionalProducts(),
                 order.getSub_date());
         unconfirmedOrder.computeTotalPrice();
         request.getSession().setAttribute("unconfirmedOrder",unconfirmedOrder);
-        response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage?orderID="+IDorder);
+        response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage?orderID="+ orderID);
     }
 }

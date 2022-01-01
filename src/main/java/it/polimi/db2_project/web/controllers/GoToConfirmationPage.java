@@ -31,8 +31,27 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
-        Integer orderID = Integer.parseInt(request.getParameter("orderID"));
+
+        // Check if an unconfirmed order has been previously created
+        if(unconfirmedOrder == null){
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No orders found!");
+            return;
+        }
+
+        int orderID;
+
+        // If the argument of Integer.parseInt is null or is a string of length zero, a
+        // NumberFormatException is thrown
+        // @see https://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html#parseInt(java.lang.String)
+        try {
+            orderID = Integer.parseInt(request.getParameter("orderID"));
+        } catch (NumberFormatException | NullPointerException e ) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid or missing parameters");
+            return;
+        }
+
         Map<String,Object> attributes = new HashMap<>();
         Customer user = (Customer) request.getSession().getAttribute("user");
         if(user != null){
@@ -52,11 +71,19 @@ public class GoToConfirmationPage extends AbstractThymeleafServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
         Integer orderID;
-        if(request.getParameter("orderID")!=null)
-            orderID = Integer.parseInt(request.getParameter("orderID"));
-        else orderID = orderService.createOrder(new Date(),unconfirmedOrder.getTotalPrice(),unconfirmedOrder.getSubscriptionDate(),
-                (Customer) request.getSession().getAttribute("user"),
-                unconfirmedOrder.getServicePackage(),unconfirmedOrder.getOptionalProductList());
-        response.sendRedirect(getServletContext().getContextPath()+"/GoToServicePayment?"+"orderID="+orderID);
+
+        // Check if the customer is actually logged in
+        if(request.getSession().getAttribute("user") != null){
+            if(request.getParameter("orderID")!=null)
+                orderID = Integer.parseInt(request.getParameter("orderID"));
+            else orderID = orderService.createOrder(new Date(),unconfirmedOrder.getTotalPrice(),unconfirmedOrder.getSubscriptionDate(),
+                    (Customer) request.getSession().getAttribute("user"),
+                    unconfirmedOrder.getServicePackage(),unconfirmedOrder.getOptionalProductList());
+            response.sendRedirect(getServletContext().getContextPath()+"/GoToServicePayment?"+"orderID="+orderID);
+        } else {
+            // If not logged in send him back to the login page
+            response.sendRedirect(getServletContext().getContextPath()+"/CheckLoginCustomer");
+        }
+
     }
 }

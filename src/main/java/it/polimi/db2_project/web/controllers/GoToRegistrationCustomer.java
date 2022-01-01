@@ -24,9 +24,9 @@ public class GoToRegistrationCustomer extends AbstractThymeleafServlet{
         processTemplate(request,response);
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        String username = null;
-        String password = null;
-        String mail = null;
+        String username;
+        String password;
+        String mail;
         username = request.getParameter("username");
         password = request.getParameter("password");
         mail = request.getParameter("mail");

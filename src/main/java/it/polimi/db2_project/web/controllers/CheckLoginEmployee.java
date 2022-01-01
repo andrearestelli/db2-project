@@ -44,7 +44,7 @@ public class CheckLoginEmployee extends AbstractThymeleafServlet{
         Optional<Employee> result = employeeService.checkCredentials(username,password);
         if(result.isPresent()){
             Employee employee = result.get();
-            request.getSession().setAttribute("user",employee);
+            request.getSession().setAttribute("employee",employee);
             // Manda alla Homepage
             response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageEmployee");
         }
