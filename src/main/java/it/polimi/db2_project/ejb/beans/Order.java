@@ -47,7 +47,7 @@ public class Order implements Serializable {
         }
         public String getText()
         {return this.text;}
-    };
+    }
 
     @ManyToOne
     @JoinColumn(name = "user_orderer")
@@ -57,7 +57,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_package")
     private ServicePackage id_package;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinTable(
             name = "order_opt_product_link",
             joinColumns = {

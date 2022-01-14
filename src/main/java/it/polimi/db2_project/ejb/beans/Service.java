@@ -26,11 +26,11 @@ public class Service implements Serializable {
     private float fee_gigabytes;
 
     // TODO verificare necessità
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(mappedBy = "services", fetch = FetchType.LAZY)
     private List<ServiceActivationSchedule> serviceActivationScheduleList;
 
     //TODO verificare necessità
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(mappedBy = "services", fetch = FetchType.LAZY)
     private List<ServicePackage> servicePackageList;
 
     public enum ServiceType{

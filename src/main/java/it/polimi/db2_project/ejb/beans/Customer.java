@@ -39,13 +39,14 @@ public class Customer implements Serializable {
         this.insolvent = 0;
     }
 
-    @OneToMany(mappedBy = "userOrderer")
+/*  Can be omitted */
+    @OneToMany(mappedBy = "userOrderer", orphanRemoval = true)
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",orphanRemoval = true)
     private List<Alert> alerts;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", orphanRemoval = true)
     private List<ServiceActivationSchedule> serviceActivationScheduleList;
 
     public Customer() {

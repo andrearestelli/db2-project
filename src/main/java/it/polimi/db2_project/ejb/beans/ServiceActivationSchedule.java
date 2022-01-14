@@ -13,14 +13,14 @@ public class ServiceActivationSchedule implements Serializable {
     private int ID;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private Customer customer;
 
     private Date activation_date;
     private Date deactivation_date;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     // referencedColumnName serve perchè si tratta di una tabella ponte che comprende una entità con chiave
     // composta da due id. In questo caso risulta dunque necessario specificare anche a quale colonna
     // della tabella ServiceActivationSchedule si riferiscono le colonne della tabella ponte.
@@ -32,7 +32,7 @@ public class ServiceActivationSchedule implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ID_service")})
     private List<Service> services;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     // referencedColumnName serve perchè si tratta di una tabella ponte che comprende una entità con chiave
     // composta da due id. In questo caso risulta dunque necessario specificare anche a quale colonna
     // della tabella ServiceActivationSchedule si riferiscono le colonne della tabella ponte.

@@ -15,7 +15,7 @@ public class Alert implements Serializable {
     private int ID;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private Customer customer;
 
