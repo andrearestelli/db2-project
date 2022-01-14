@@ -21,18 +21,6 @@ public class OptionalProduct implements Serializable {
     private int validity_period;
     private double monthly_fee;
 
-    /* TODO
-    @ManyToMany(mappedBy = "optionalProducts")
-    private List<ServicePackage> servicePackagesOwner;
-
-    @ManyToMany(mappedBy = "optionalProducts")
-    private List<Order> orders;
-
-    // TODO verificare necessità
-    @ManyToMany(mappedBy = "optionalProducts")
-    private List<ServiceActivationSchedule> serviceActivationScheduleList;
-    */
-
     public OptionalProduct(){
 
     }

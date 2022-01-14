@@ -60,4 +60,28 @@ public class Service implements Serializable {
     public Integer getID() {
         return ID;
     }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public int getSms() {
+        return sms;
+    }
+
+    public float getFee_minutes() {
+        return fee_minutes;
+    }
+
+    public float getFee_sms() {
+        return fee_sms;
+    }
+
+    public int getGigabytes() {
+        return gigabytes;
+    }
+
+    public float getFee_gigabytes() {
+        return fee_gigabytes;
+    }
 }

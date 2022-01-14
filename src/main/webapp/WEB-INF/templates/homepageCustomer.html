@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>HomePageCustomer</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
+    <script th:src = "@{/scripts/showDetailsScript.js}" charset="utf-8" defer></script>
 </head>
 <body>
 <div th:if="${username!=null}" class="top-right-corner">
@@ -36,6 +37,13 @@
         </td>
     </tr>
 </table>
+
+<div id="modalContainer" class="modal">
+    <div id="modal" class="modal-content">
+        <button id="close" class="close">X</button>
+    </div>
+</div>
+
 <div>Here below are shown all the available service packages</div>
 <table>
     <tr>
@@ -52,7 +60,16 @@
         <td>
             <table class="table1">
                 <tr class="tr1" th:each="service : ${servicePackage.services}">
-                    <td class="td1" th:text="${service.type}"></td>
+                    <td class="td1" th:text="${service.type}" id="type"></td>
+                    <td th:if="${service.minutes != 0}" class="tdhidden" th:text="${service.minutes}" id="minutes"></td>
+                    <td th:if="${service.sms != 0}" class="tdhidden" th:text="${service.sms}" id="sms"></td>
+                    <td th:if="${service.fee_minutes != 0.0}" class="tdhidden" th:text="${service.fee_minutes}" id="fee_minutes"></td>
+                    <td th:if="${service.fee_sms != 0.0}" class="tdhidden" th:text="${service.fee_sms}" id="fee_sms"></td>
+                    <td th:if="${service.gigabytes != 0}" class="tdhidden" th:text="${service.gigabytes}" id="gigabytes"></td>
+                    <td th:if="${service.fee_gigabytes != 0.0}" class="tdhidden" th:text="${service.fee_gigabytes}" id="fee_gigabytes"></td>
+                    <td th:if="${service.type != 'Fixed Phone'}" class="td1">
+                        <button onclick="showDetails(this)">Details</button>
+                    </td>
                 </tr>
             </table>
         </td>

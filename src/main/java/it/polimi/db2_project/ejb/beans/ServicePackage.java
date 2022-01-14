@@ -21,10 +21,6 @@ public class ServicePackage implements Serializable {
     private String name;
     private int validity_period;
     private double monthly_fee;
-    /*
-    @OneToMany(mappedBy = "id_package")
-    private List<Order>
-     */
 
     @ManyToMany
     @JoinTable(

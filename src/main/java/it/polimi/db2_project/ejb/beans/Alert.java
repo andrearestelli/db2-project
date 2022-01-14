@@ -11,6 +11,7 @@ import java.util.Date;
                 "FROM Alert a ")
 public class Alert implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
 
     @Id
