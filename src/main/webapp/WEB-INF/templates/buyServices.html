@@ -21,6 +21,8 @@
             <th><b>Service</b></th>
             <th><b>Validity Period</b></th>
             <th><b>Optional products</b></th>
+            <th><b>Monthly fee</b></th>
+
         </tr>
         <tr th:each="servicePackage : ${servicePackages}">
             <td><input type="radio" name="servicePackageSelected" th:text="${servicePackage.name}"
@@ -40,6 +42,10 @@
                     </tr>
                 </table>
 
+            </td>
+            <td>
+                <span th:text="${servicePackage.monthly_fee}"></span>
+                <span> &euro;</span>
             </td>
         </tr>
     </table>
