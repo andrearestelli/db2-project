@@ -13,7 +13,8 @@ public class ServiceActivationSchedule implements Serializable {
     private int ID;
 
     @Id
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    //inserire cascade
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private Customer customer;
 

@@ -57,7 +57,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_package")
     private ServicePackage id_package;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     @JoinTable(
             name = "order_opt_product_link",
             joinColumns = {
