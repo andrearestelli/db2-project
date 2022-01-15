@@ -115,7 +115,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('andreareste','zxc1','andrea.restelli@gmail.com',0),('ciccio','franco','cicciopaterna@gmail.com',0),('cugolizer','deadlock','gianpaolo.cugola@gmail.com',0),('damianandrew','softeng2','damian.andrew@mail.polimi.it',0),('domenicoputi','zxc1','domenico1.putignano@gmail.com',0),('fedesneakers','airforce1','federico.piermattei@gmail.com',0),('gianluboss','30L','gianluca.radi@gmail.com',0),('martinenghi','ok','davide.martinenghi@gmail.com',0),('pierorendina','qwerty','pierorendina@gmail.com',0),('sanchiopazzo','ps5','andreailsanchio@gmail.com',0);
+INSERT INTO `customer` VALUES ('andreareste','zxc1','andrea.restelli@gmail.com',0),('andreasanchini','andre','andrea.sanchini@gmail.com',0),('damianoverdi','damiano','damiano.verdi@mail.polimi.it',0),('domenicoputi','zxc1','domenico1.putignano@gmail.com',0),('federicodimarzio','fede','federico.dimarzio@gmail.com',0),('francepat','franco','francescopaterna@gmail.com',0),('gianlucaradi','gianlu','gianluca.radi@gmail.com',0),('mariorossi','mario','mario.rossi@gmail.com',0),('pierorendina','qwerty','pierorendina@gmail.com',0),('riccardoprimo','ricc','riccardo.primo@gmail.com',0);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -164,7 +164,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('annamariaantola','mips'),('cinziona','crm'),('giampaologiovanniagosta','calcolatrice'),('levantinoski','zucchi'),('stefanoceri','dbms'),('valentinona','bilancio');
+INSERT INTO `employee` VALUES ('cinziaferri','ferri'),('giampaoloagosta','giampagosta'),('gianpaolocugola','cugola'),('matteozerini','zerini'),('stefanoceri','dbms'),('valentina','vale');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +208,7 @@ CREATE TABLE `optional_product` (
   `validity_period` int NOT NULL,
   `monthly_fee` decimal(2,0) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +217,7 @@ CREATE TABLE `optional_product` (
 
 LOCK TABLES `optional_product` WRITE;
 /*!40000 ALTER TABLE `optional_product` DISABLE KEYS */;
-INSERT INTO `optional_product` VALUES (1,'Decoder',3,13),(2,'Google news feed',3,8),(3,'Internet Tv channel',2,15),(4,'SMS news feed',3,10),(5,'Youtube Premium',3,5),(6,'Netflix',4,15),(7,'Spotify',3,23),(8,'DAZN',2,30),(9,'Sky go',3,35);
+INSERT INTO `optional_product` VALUES (1,'Decoder',3,13),(2,'Google news feed',3,8),(3,'Internet Tv channel',2,15),(4,'SMS news feed',3,10),(5,'Youtube Premium',3,5),(6,'Netflix',4,15),(7,'Spotify',3,23),(8,'DAZN',2,30),(9,'Sky go',3,35),(10,'AmazonMusic',3,13),(11,'AppleMusic',5,10),(12,'SMS news feed',3,10),(13,'Google news feed',3,8),(14,'Google news feed',3,8),(15,'SMS news feed',3,10);
 /*!40000 ALTER TABLE `optional_product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -488,9 +488,31 @@ CREATE TABLE `package_opt_product_link` (
 
 LOCK TABLES `package_opt_product_link` WRITE;
 /*!40000 ALTER TABLE `package_opt_product_link` DISABLE KEYS */;
-INSERT INTO `package_opt_product_link` VALUES (2,1),(10,1),(13,1),(16,1),(2,2),(6,2),(12,2),(13,2),(1,3),(7,3),(14,3),(17,3),(2,4),(4,4),(6,4),(4,5),(10,5),(13,5),(15,6),(16,7),(17,8),(16,9);
+INSERT INTO `package_opt_product_link` VALUES (2,1),(10,1),(13,1),(16,1),(18,1),(2,2),(6,2),(12,2),(13,2),(18,2),(1,3),(7,3),(14,3),(17,3),(2,4),(4,4),(6,4),(4,5),(10,5),(13,5),(18,5),(19,5),(15,6),(16,7),(18,7),(17,8),(16,9),(19,10),(20,11);
 /*!40000 ALTER TABLE `package_opt_product_link` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `package_opt_product_link_BEFORE_INSERT` BEFORE INSERT ON `package_opt_product_link` FOR EACH ROW BEGIN
+	IF((SELECT sp.validity_period FROM telcodb.service_package sp
+		WHERE sp.ID = new.id_package)!=(SELECT op.validity_period FROM telcodb.optional_product op
+		WHERE op.ID = new.id_opt_product))
+	THEN signal sqlstate '45000'
+    SET message_text='Invalid optional product inserted';
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `schedule_service_link`
@@ -590,7 +612,7 @@ CREATE TABLE `service_package` (
   `validity_period` int NOT NULL,
   `monthly_fee` decimal(2,0) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -599,7 +621,7 @@ CREATE TABLE `service_package` (
 
 LOCK TABLES `service_package` WRITE;
 /*!40000 ALTER TABLE `service_package` DISABLE KEYS */;
-INSERT INTO `service_package` VALUES (1,'service1',2,24),(2,'service2',3,20),(3,'service3',6,25),(4,'service4',3,18),(5,'service5',5,45),(6,'service6',3,41),(7,'service7',2,46),(10,'service8',3,47),(11,'service9',4,40),(12,'service8',3,90),(13,'service10',3,33),(14,'service10',2,54),(15,'service10',4,50),(16,'service10',3,46),(17,'service1',2,54);
+INSERT INTO `service_package` VALUES (1,'service1',2,24),(2,'service2',3,20),(3,'service3',6,25),(4,'service4',3,18),(5,'service5',5,45),(6,'service6',3,41),(7,'service7',2,46),(10,'service8',3,47),(11,'service9',4,40),(12,'service8',3,90),(13,'service10',3,33),(14,'service10',2,54),(15,'service10',4,50),(16,'service10',3,46),(17,'service1',2,54),(18,'service11',3,56),(19,'service11',3,60),(20,'service11',5,45);
 /*!40000 ALTER TABLE `service_package` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -658,7 +680,7 @@ CREATE TABLE `service_to_package_link` (
 
 LOCK TABLES `service_to_package_link` WRITE;
 /*!40000 ALTER TABLE `service_to_package_link` DISABLE KEYS */;
-INSERT INTO `service_to_package_link` VALUES (1,1),(2,1),(3,1),(6,2),(8,2),(10,2),(6,3),(7,3),(8,4),(1,5),(4,5),(6,5),(8,6),(9,6),(10,6),(2,7),(7,7),(3,10),(7,10),(6,11),(7,11),(1,12),(5,13),(6,13),(8,14),(9,14),(7,15),(8,15),(9,16),(10,16),(10,17);
+INSERT INTO `service_to_package_link` VALUES (1,1),(2,1),(3,1),(6,2),(8,2),(10,2),(6,3),(7,3),(8,4),(1,5),(4,5),(6,5),(8,6),(9,6),(10,6),(2,7),(7,7),(3,10),(7,10),(6,11),(7,11),(1,12),(5,13),(6,13),(8,14),(9,14),(7,15),(8,15),(9,16),(10,16),(10,17),(6,18),(10,18),(10,19),(7,20),(8,20),(9,20);
 /*!40000 ALTER TABLE `service_to_package_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -746,4 +768,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-30 14:03:31
+-- Dump completed on 2022-01-15 12:12:54
