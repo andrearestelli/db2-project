@@ -67,6 +67,7 @@ CREATE TABLE `average_number_of_optional_products` (
 
 LOCK TABLES `average_number_of_optional_products` WRITE;
 /*!40000 ALTER TABLE `average_number_of_optional_products` DISABLE KEYS */;
+INSERT INTO `average_number_of_optional_products` VALUES ('service1',0,0,0.00),('service2',0,0,0.00),('service3',0,0,0.00),('service4',0,0,0.00),('service5',0,0,0.00),('service6',0,0,0.00),('service7',0,0,0.00);
 /*!40000 ALTER TABLE `average_number_of_optional_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,6 +91,7 @@ CREATE TABLE `best_seller_optional_product` (
 
 LOCK TABLES `best_seller_optional_product` WRITE;
 /*!40000 ALTER TABLE `best_seller_optional_product` DISABLE KEYS */;
+INSERT INTO `best_seller_optional_product` VALUES ('Amazon Music',0.00),('Apple Music',0.00),('DAZN',0.00),('Decoder',0.00),('Google news feed',0.00),('Internet Tv channel',0.00),('Netflix',0.00),('NOW TV',0.00),('Sky go',0.00),('SMS news feed',0.00),('Spotify',0.00),('Youtube Premium',0.00);
 /*!40000 ALTER TABLE `best_seller_optional_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +210,7 @@ CREATE TABLE `optional_product` (
   `validity_period` int NOT NULL,
   `monthly_fee` decimal(2,0) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,7 +219,7 @@ CREATE TABLE `optional_product` (
 
 LOCK TABLES `optional_product` WRITE;
 /*!40000 ALTER TABLE `optional_product` DISABLE KEYS */;
-INSERT INTO `optional_product` VALUES (1,'Decoder',3,13),(2,'Google news feed',3,8),(3,'Internet Tv channel',2,15),(4,'SMS news feed',3,10),(5,'Youtube Premium',3,5),(6,'Netflix',4,15),(7,'Spotify',3,23),(8,'DAZN',2,30),(9,'Sky go',3,35),(10,'AmazonMusic',3,13),(11,'AppleMusic',5,10),(12,'SMS news feed',3,10),(13,'Google news feed',3,8),(14,'Google news feed',3,8),(15,'SMS news feed',3,10);
+INSERT INTO `optional_product` VALUES (1,'Decoder',3,13),(2,'Google news feed',3,8),(3,'Internet Tv channel',3,15),(4,'SMS news feed',3,10),(5,'Youtube Premium',3,5),(6,'Netflix',4,15),(7,'Spotify',3,23),(8,'DAZN',2,30),(9,'Sky go',3,35),(10,'Amazon Music',3,13),(11,'Apple Music',5,10),(12,'NOW TV',2,30);
 /*!40000 ALTER TABLE `optional_product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -488,7 +490,7 @@ CREATE TABLE `package_opt_product_link` (
 
 LOCK TABLES `package_opt_product_link` WRITE;
 /*!40000 ALTER TABLE `package_opt_product_link` DISABLE KEYS */;
-INSERT INTO `package_opt_product_link` VALUES (2,1),(10,1),(13,1),(16,1),(18,1),(2,2),(6,2),(12,2),(13,2),(18,2),(1,3),(7,3),(14,3),(17,3),(2,4),(4,4),(6,4),(4,5),(10,5),(13,5),(18,5),(19,5),(15,6),(16,7),(18,7),(17,8),(16,9),(19,10),(20,11);
+INSERT INTO `package_opt_product_link` VALUES (2,1),(8,1),(6,2),(2,3),(7,3),(3,4),(6,4),(7,4),(3,5),(7,5),(8,5),(1,6),(9,6),(2,7),(7,7),(8,7),(3,9),(6,9),(7,9),(2,10),(8,10),(4,11),(10,11);
 /*!40000 ALTER TABLE `package_opt_product_link` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -612,7 +614,7 @@ CREATE TABLE `service_package` (
   `validity_period` int NOT NULL,
   `monthly_fee` decimal(2,0) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -621,7 +623,7 @@ CREATE TABLE `service_package` (
 
 LOCK TABLES `service_package` WRITE;
 /*!40000 ALTER TABLE `service_package` DISABLE KEYS */;
-INSERT INTO `service_package` VALUES (1,'service1',2,24),(2,'service2',3,20),(3,'service3',6,25),(4,'service4',3,18),(5,'service5',5,45),(6,'service6',3,41),(7,'service7',2,46),(10,'service8',3,47),(11,'service9',4,40),(12,'service8',3,90),(13,'service10',3,33),(14,'service10',2,54),(15,'service10',4,50),(16,'service10',3,46),(17,'service1',2,54),(18,'service11',3,56),(19,'service11',3,60),(20,'service11',5,45);
+INSERT INTO `service_package` VALUES (1,'service1',4,45),(2,'service2',3,40),(3,'service3',3,57),(4,'service4',5,35),(5,'service5',4,48),(6,'service6',3,38),(7,'service6',3,37),(8,'service7',3,48),(9,'service7',4,42),(10,'service7',5,67);
 /*!40000 ALTER TABLE `service_package` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -680,7 +682,7 @@ CREATE TABLE `service_to_package_link` (
 
 LOCK TABLES `service_to_package_link` WRITE;
 /*!40000 ALTER TABLE `service_to_package_link` DISABLE KEYS */;
-INSERT INTO `service_to_package_link` VALUES (1,1),(2,1),(3,1),(6,2),(8,2),(10,2),(6,3),(7,3),(8,4),(1,5),(4,5),(6,5),(8,6),(9,6),(10,6),(2,7),(7,7),(3,10),(7,10),(6,11),(7,11),(1,12),(5,13),(6,13),(8,14),(9,14),(7,15),(8,15),(9,16),(10,16),(10,17),(6,18),(10,18),(10,19),(7,20),(8,20),(9,20);
+INSERT INTO `service_to_package_link` VALUES (7,1),(8,1),(9,1),(1,2),(10,2),(8,3),(9,4),(10,4),(9,5),(10,5),(6,6),(10,6),(7,8),(9,8),(6,9),(10,9),(8,10),(9,10),(10,10);
 /*!40000 ALTER TABLE `service_to_package_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -704,6 +706,7 @@ CREATE TABLE `total_purchases_per_package` (
 
 LOCK TABLES `total_purchases_per_package` WRITE;
 /*!40000 ALTER TABLE `total_purchases_per_package` DISABLE KEYS */;
+INSERT INTO `total_purchases_per_package` VALUES ('service1',0),('service2',0),('service3',0),('service4',0),('service5',0),('service6',0),('service7',0);
 /*!40000 ALTER TABLE `total_purchases_per_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -728,6 +731,7 @@ CREATE TABLE `total_purchases_validity_period_per_package` (
 
 LOCK TABLES `total_purchases_validity_period_per_package` WRITE;
 /*!40000 ALTER TABLE `total_purchases_validity_period_per_package` DISABLE KEYS */;
+INSERT INTO `total_purchases_validity_period_per_package` VALUES ('service1',4,0),('service2',3,0),('service3',3,0),('service4',5,0),('service5',4,0),('service6',3,0),('service7',3,0),('service7',4,0),('service7',5,0);
 /*!40000 ALTER TABLE `total_purchases_validity_period_per_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -752,6 +756,7 @@ CREATE TABLE `total_value_of_sales` (
 
 LOCK TABLES `total_value_of_sales` WRITE;
 /*!40000 ALTER TABLE `total_value_of_sales` DISABLE KEYS */;
+INSERT INTO `total_value_of_sales` VALUES ('service1',0.00,0.00),('service2',0.00,0.00),('service3',0.00,0.00),('service4',0.00,0.00),('service5',0.00,0.00),('service6',0.00,0.00),('service7',0.00,0.00);
 /*!40000 ALTER TABLE `total_value_of_sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -768,4 +773,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-15 12:12:54
+-- Dump completed on 2022-01-15 12:47:13
