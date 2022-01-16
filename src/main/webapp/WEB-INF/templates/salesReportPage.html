@@ -62,7 +62,7 @@
   </tr>
   <tr th:each="alert : ${alerts}">
     <td th:text="${alert.ID}"></td>
-    <td th:text="${alert.user_id.username}"></td>
+    <td th:text="${alert.customer.username}"></td>
     <td th:text="${alert.datetime}"></td>
     <td>
       <span th:text="${alert.amount}"></span>
