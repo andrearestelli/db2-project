@@ -53,7 +53,7 @@ public class Order implements Serializable {
     @JoinColumn(name = "user_orderer")
     private Customer userOrderer;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "id_package")
     private ServicePackage id_package;
 

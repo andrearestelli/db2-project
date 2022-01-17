@@ -12,5 +12,6 @@
     <p><input id="password" name="password" class="inputForm" placeholder="password" type="password"/> <br/></p>
     <p><input id="submitButton" type="submit" class="button1" value="Register"/></p>
 </form>
+<p th:if="${errorMessage != null}" th:text="${errorMessage}"></p>
 </body>
 </html>

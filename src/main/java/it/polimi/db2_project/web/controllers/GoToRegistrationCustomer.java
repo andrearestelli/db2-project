@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
 
 @WebServlet("/GoToRegistrationCustomer")
@@ -31,11 +32,14 @@ public class GoToRegistrationCustomer extends AbstractThymeleafServlet{
         password = request.getParameter("password");
         mail = request.getParameter("mail");
         if(username == null || password == null || username.isEmpty() || password.isEmpty() || mail == null || mail.isEmpty()) {
-            //TODO ritorna errore
+            processTemplate(request, response, Collections.singletonMap("errorMessage",
+                    "Invalid parameters"));
+            return;
         }
         Optional<Customer> result = customerService.findCustomerByUsername(username);
         if(result.isPresent()) {
-            //TODO messaggio di errore utente esistente
+            processTemplate(request, response, Collections.singletonMap("errorMessage",
+                    "Username already in use, choose another one."));
         }
         else{
             customerService.registerCustomer(username,password,mail);
