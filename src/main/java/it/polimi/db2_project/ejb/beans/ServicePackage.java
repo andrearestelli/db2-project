@@ -23,7 +23,7 @@ public class ServicePackage implements Serializable {
     private double monthly_fee;
 
     // Lazy fetch policy in order to improve performance when optional products are not explicitly needed
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     @JoinTable(
             name = "package_opt_product_link",
             joinColumns = {
@@ -32,7 +32,7 @@ public class ServicePackage implements Serializable {
     private List<OptionalProduct> optionalProducts;
 
     // Lazy fetch policy in order to improve performance when services are not explicitly needed
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     @JoinTable(
             name = "service_to_package_link",
             joinColumns = {
