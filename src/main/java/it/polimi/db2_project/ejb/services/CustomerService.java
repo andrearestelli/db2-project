@@ -32,6 +32,10 @@ public class CustomerService {
         return Optional.ofNullable(em.find(Customer.class,username));
     }
 
+    //We need to refresh the Customer object when
+    // after a successful or unsuccessful order, the insolvent attribute is updated
+    // within the database through triggers, so the changes that have occurred on the database
+    // must be reflected in the Java object
     public Customer refreshCustomer(String username) {
         Customer customer = em.find(Customer.class,username);
         em.refresh(customer);

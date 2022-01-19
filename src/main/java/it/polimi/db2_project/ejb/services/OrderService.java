@@ -29,6 +29,9 @@ public class OrderService {
     }
 
     public void setStateByID(Integer ID, Order.StateType stateType) {
+        //It's not necessary to use the merge method to make the Order object managed and apply the updates on
+        //the database, because the second way of making an object managed is to extract the object from the
+        //database by the find method
         Order order = em.find(Order.class,ID);
         order.setState(stateType);
     }

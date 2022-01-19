@@ -60,6 +60,5 @@ public class GoToBuyServices extends AbstractThymeleafServlet{
         } catch (ParseException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
-        // Controllare se i prodotti opzionali selezionati sono coerenti ???
     }
 }

@@ -45,13 +45,15 @@ public class CheckLoginCustomer extends AbstractThymeleafServlet {
         if(result.isPresent()){
             Customer customer = result.get();
             request.getSession().setAttribute("user",customer);
-            // Manda alla Homepage
+            // In the event that an UnconfirmedOrder exists in the HTTP session, this means that
+            // a user who has not previously logged in is making the purchase and therefore needs to log in.
             if(request.getSession().getAttribute("unconfirmedOrder")!=null)
                 response.sendRedirect(getServletContext().getContextPath()+"/GoToConfirmationPage?orderID=0");
-            else response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
+            else //Go to HomePage Customer
+                response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageCustomer");
         }
         else{
-            // Ritorna messaggio di errore
+            // Return error message
             processTemplate(request, response, Collections.singletonMap("errorMessage",
                     "Invalid username or password"));
         }

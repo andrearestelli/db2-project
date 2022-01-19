@@ -45,11 +45,11 @@ public class CheckLoginEmployee extends AbstractThymeleafServlet{
         if(result.isPresent()){
             Employee employee = result.get();
             request.getSession().setAttribute("employee",employee);
-            // Manda alla Homepage
+            // Go to HomePage Employee
             response.sendRedirect(getServletContext().getContextPath()+"/GoToHomePageEmployee");
         }
         else{
-            // Ritorna errore
+            // Return error message
             processTemplate(request, response, Collections.singletonMap("errorMessage",
                     "Invalid username or password"));
         }
