@@ -21,9 +21,10 @@ public class ServiceActivationSchedule implements Serializable {
     private Date deactivation_date;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
-    // referencedColumnName serve perchè si tratta di una tabella ponte che comprende una entità con chiave
-    // composta da due id. In questo caso risulta dunque necessario specificare anche a quale colonna
-    // della tabella ServiceActivationSchedule si riferiscono le colonne della tabella ponte.
+    // referencedColumnName is used because it is a bridge table
+    // that includes an entity with a key composed of two ids. In this case it is
+    // therefore also necessary to specify which column of the ServiceActivationSchedule
+    // table the columns of the bridge table refer to.
     @JoinTable(
             name = "schedule_service_link",
             joinColumns = {
@@ -33,9 +34,10 @@ public class ServiceActivationSchedule implements Serializable {
     private List<Service> services;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
-    // referencedColumnName serve perchè si tratta di una tabella ponte che comprende una entità con chiave
-    // composta da due id. In questo caso risulta dunque necessario specificare anche a quale colonna
-    // della tabella ServiceActivationSchedule si riferiscono le colonne della tabella ponte.
+    // referencedColumnName is used because it is a bridge table
+    // that includes an entity with a key composed of two ids. In this case it is
+    // therefore also necessary to specify which column of the ServiceActivationSchedule
+    // table the columns of the bridge table refer to.
     @JoinTable(
             name = "opt_product_schedule_link",
             joinColumns = {
