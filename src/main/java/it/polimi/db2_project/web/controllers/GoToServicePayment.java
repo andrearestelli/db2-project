@@ -55,7 +55,6 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
                     orderService.findByID(orderID));
         }
         // Update state of order in db
-        //TODO Specificare perchè NON è necessaria l'operazione merge-> viene usata find
         orderService.setStateByID(orderID, stateType);
         // Remove unconfirmed order from the session
         request.getSession().removeAttribute("unconfirmedOrder");
