@@ -67,7 +67,7 @@ CREATE TABLE `average_number_of_optional_products` (
 
 LOCK TABLES `average_number_of_optional_products` WRITE;
 /*!40000 ALTER TABLE `average_number_of_optional_products` DISABLE KEYS */;
-INSERT INTO `average_number_of_optional_products` VALUES ('service1',0,0,0.00),('service2',0,0,0.00),('service3',0,0,0.00),('service4',0,0,0.00),('service5',0,0,0.00),('service6',0,0,0.00),('service7',0,0,0.00);
+INSERT INTO `average_number_of_optional_products` VALUES ('All Inclusive',0,0,0.00),('All Inclusive Max',0,0,0.00),('Basic',0,0,0.00),('Business',0,0,0.00),('Family',0,0,0.00),('Light',0,0,0.00),('Young',0,0,0.00);
 /*!40000 ALTER TABLE `average_number_of_optional_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('andreareste','zxc1','andrea.restelli@gmail.com',0),('andreasanchini','andre','andrea.sanchini@gmail.com',0),('damianoverdi','damiano','damiano.verdi@mail.polimi.it',0),('domenicoputi','zxc1','domenico1.putignano@gmail.com',0),('federicodimarzio','fede','federico.dimarzio@gmail.com',0),('francepat','franco','francescopaterna@gmail.com',0),('gianlucaradi','gianlu','gianluca.radi@gmail.com',0),('mariorossi','mario','mario.rossi@gmail.com',0),('pierorendina','qwerty','pierorendina@gmail.com',0),('riccardoprimo','ricc','riccardo.primo@gmail.com',0);
+INSERT INTO `customer` VALUES ('andreareste','zxc1','andrea.restelli@gmail.com',0),('andreasanchini','andre','andrea.sanchini@gmail.com',0),('customer1','customer1','customer1@gmail.com',0),('damianoverdi','damiano','damiano.verdi@mail.polimi.it',0),('domenicoputi','zxc1','domenico1.putignano@gmail.com',0),('federicodimarzio','fede','federico.dimarzio@gmail.com',0),('francepat','franco','francescopaterna@gmail.com',0),('gianlucaradi','gianlu','gianluca.radi@gmail.com',0),('mariorossi','mario','mario.rossi@gmail.com',0),('pierorendina','qwerty','pierorendina@gmail.com',0),('riccardoprimo','ricc','riccardo.primo@gmail.com',0);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -166,7 +166,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES ('cinziaferri','ferri'),('giampaoloagosta','giampagosta'),('gianpaolocugola','cugola'),('matteozerini','zerini'),('stefanoceri','dbms'),('valentina','vale');
+INSERT INTO `employee` VALUES ('cinziaferri','ferri'),('employee1','employee1'),('giampaoloagosta','giampagosta'),('gianpaolocugola','cugola'),('matteozerini','zerini'),('stefanoceri','dbms'),('valentina','vale');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -490,7 +490,7 @@ CREATE TABLE `package_opt_product_link` (
 
 LOCK TABLES `package_opt_product_link` WRITE;
 /*!40000 ALTER TABLE `package_opt_product_link` DISABLE KEYS */;
-INSERT INTO `package_opt_product_link` VALUES (2,1),(8,1),(6,2),(2,3),(7,3),(3,4),(6,4),(7,4),(3,5),(7,5),(8,5),(1,6),(9,6),(2,7),(7,7),(8,7),(3,9),(6,9),(7,9),(2,10),(8,10),(4,11),(10,11);
+INSERT INTO `package_opt_product_link` VALUES (2,1),(6,1),(3,2),(6,2),(8,2),(2,3),(6,4),(3,5),(7,5),(1,6),(5,6),(9,6),(2,7),(3,7),(7,7),(2,10),(8,10),(4,11),(10,11);
 /*!40000 ALTER TABLE `package_opt_product_link` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -623,7 +623,7 @@ CREATE TABLE `service_package` (
 
 LOCK TABLES `service_package` WRITE;
 /*!40000 ALTER TABLE `service_package` DISABLE KEYS */;
-INSERT INTO `service_package` VALUES (1,'service1',4,45),(2,'service2',3,40),(3,'service3',3,57),(4,'service4',5,35),(5,'service5',4,48),(6,'service6',3,38),(7,'service6',3,37),(8,'service7',3,48),(9,'service7',4,42),(10,'service7',5,67);
+INSERT INTO `service_package` VALUES (1,'Basic',4,45),(2,'Family',3,40),(3,'Business',3,57),(4,'All Inclusive',5,35),(5,'All Inclusive Max',4,48),(6,'Light',3,38),(7,'Light',3,37),(8,'Young',3,48),(9,'Young',4,42),(10,'Young',5,62);
 /*!40000 ALTER TABLE `service_package` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -682,7 +682,7 @@ CREATE TABLE `service_to_package_link` (
 
 LOCK TABLES `service_to_package_link` WRITE;
 /*!40000 ALTER TABLE `service_to_package_link` DISABLE KEYS */;
-INSERT INTO `service_to_package_link` VALUES (7,1),(8,1),(9,1),(1,2),(10,2),(8,3),(9,4),(10,4),(9,5),(10,5),(6,6),(10,6),(7,8),(9,8),(6,9),(10,9),(8,10),(9,10),(10,10);
+INSERT INTO `service_to_package_link` VALUES (7,1),(8,1),(9,1),(1,2),(10,2),(8,3),(9,4),(10,4),(9,5),(10,5),(6,6),(10,6),(7,8),(9,8),(6,9),(10,9),(4,10),(5,10),(6,10);
 /*!40000 ALTER TABLE `service_to_package_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -706,7 +706,7 @@ CREATE TABLE `total_purchases_per_package` (
 
 LOCK TABLES `total_purchases_per_package` WRITE;
 /*!40000 ALTER TABLE `total_purchases_per_package` DISABLE KEYS */;
-INSERT INTO `total_purchases_per_package` VALUES ('service1',0),('service2',0),('service3',0),('service4',0),('service5',0),('service6',0),('service7',0);
+INSERT INTO `total_purchases_per_package` VALUES ('All Inclusive',0),('All Inclusive Max',0),('Basic',0),('Business',0),('Family',0),('Light',0),('Young',0);
 /*!40000 ALTER TABLE `total_purchases_per_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -731,7 +731,7 @@ CREATE TABLE `total_purchases_validity_period_per_package` (
 
 LOCK TABLES `total_purchases_validity_period_per_package` WRITE;
 /*!40000 ALTER TABLE `total_purchases_validity_period_per_package` DISABLE KEYS */;
-INSERT INTO `total_purchases_validity_period_per_package` VALUES ('service1',4,0),('service2',3,0),('service3',3,0),('service4',5,0),('service5',4,0),('service6',3,0),('service7',3,0),('service7',4,0),('service7',5,0);
+INSERT INTO `total_purchases_validity_period_per_package` VALUES ('All Inclusive',5,0),('All Inclusive Max',4,0),('Basic',4,0),('Business',3,0),('Family',3,0),('Light',3,0),('Young',3,0),('Young',4,0),('Young',5,0);
 /*!40000 ALTER TABLE `total_purchases_validity_period_per_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -756,7 +756,7 @@ CREATE TABLE `total_value_of_sales` (
 
 LOCK TABLES `total_value_of_sales` WRITE;
 /*!40000 ALTER TABLE `total_value_of_sales` DISABLE KEYS */;
-INSERT INTO `total_value_of_sales` VALUES ('service1',0.00,0.00),('service2',0.00,0.00),('service3',0.00,0.00),('service4',0.00,0.00),('service5',0.00,0.00),('service6',0.00,0.00),('service7',0.00,0.00);
+INSERT INTO `total_value_of_sales` VALUES ('All Inclusive',0.00,0.00),('All Inclusive Max',0.00,0.00),('Basic',0.00,0.00),('Business',0.00,0.00),('Family',0.00,0.00),('Light',0.00,0.00),('Young',0.00,0.00);
 /*!40000 ALTER TABLE `total_value_of_sales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -773,4 +773,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-15 12:47:13
+-- Dump completed on 2022-01-20 10:05:06
