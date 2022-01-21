@@ -18,6 +18,11 @@ import java.util.List;
                         query = "SELECT o " +
                         "FROM Order o " +
                         "WHERE o.state = 'REJECTED'")
+                ,
+                @NamedQuery(name = "Order.updateStateOrder",
+                        query = "UPDATE Order o " +
+                        "SET o.state = :state " +
+                        "WHERE o.ID = :ID")
         }
 )
 

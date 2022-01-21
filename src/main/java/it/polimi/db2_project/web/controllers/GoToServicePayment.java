@@ -4,6 +4,7 @@ import it.polimi.db2_project.ejb.beans.Customer;
 import it.polimi.db2_project.ejb.beans.Order;
 import it.polimi.db2_project.ejb.services.CustomerService;
 import it.polimi.db2_project.ejb.services.OrderService;
+import it.polimi.db2_project.web.utils.UnconfirmedOrder;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.ejb.EJB;
@@ -43,8 +44,21 @@ public class GoToServicePayment extends AbstractThymeleafServlet{
             return;
         }
 
-        Random rn = new Random();
-        int external_service = rn.nextInt(3);
+        // Calling the external service
+        // Easter-egg: Service Package ID == 2 -> payment always refused
+
+        int external_service = 0;
+
+        UnconfirmedOrder unconfirmedOrder = (UnconfirmedOrder) request.getSession().getAttribute("unconfirmedOrder");
+        if(unconfirmedOrder != null){
+            if(unconfirmedOrder.getServicePackage().getID()==2){
+                external_service = 2;
+            } else {
+                Random rn = new Random();
+                external_service = rn.nextInt(3);
+            }
+        }
+
         Order.StateType stateType;
         if (external_service == 2) {
             stateType = Order.StateType.REJECTED;

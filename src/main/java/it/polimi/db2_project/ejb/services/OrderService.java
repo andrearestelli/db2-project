@@ -29,11 +29,11 @@ public class OrderService {
     }
 
     public void setStateByID(Integer ID, Order.StateType stateType) {
-        //It's not necessary to use the merge method to make the Order object managed and apply the updates on
-        //the database, because the second way of making an object managed is to extract the object from the
-        //database by the find method
-        Order order = em.find(Order.class,ID);
-        order.setState(stateType);
+        // We update the state of the order by executing a JPQL UPDATE named query, by doing this, we are
+        // sure that the update is executed even if there are no changes in the tuple
+        // for example in case of multiple subsequent rejection of the payment.
+        em.createNamedQuery("Order.updateStateOrder", Order.class).setParameter("ID", ID)
+                .setParameter("state", stateType.getText()).executeUpdate();
     }
 
     public void createActivationSchedule(Customer customer, Order order) {
