@@ -14,6 +14,11 @@
         <class>it.polimi.db2_project.ejb.beans.OptionalProduct</class>
         <class>it.polimi.db2_project.ejb.beans.Order</class>
         <class>it.polimi.db2_project.ejb.beans.ServiceActivationSchedule</class>
+        <class>it.polimi.db2_project.ejb.beans.salesreportbeans.AverageNumberOfOptionalProducts</class>
+        <class>it.polimi.db2_project.ejb.beans.salesreportbeans.BestSellerOptionalProduct</class>
+        <class>it.polimi.db2_project.ejb.beans.salesreportbeans.TotalPurchasesPerPackage</class>
+        <class>it.polimi.db2_project.ejb.beans.salesreportbeans.TotalPurchasesValidityPeriodPerPackage</class>
+        <class>it.polimi.db2_project.ejb.beans.salesreportbeans.TotalValueOfSales</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/telcodb"/>
